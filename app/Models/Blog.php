@@ -16,4 +16,7 @@ class Blog extends Model
     public function blog_sub_category(){
         return $this->belongsTo(BlogSubCategory::class);
     }
+    public function admin(){
+        return $this->belongsTo(Admin::class);
+    }
 }

@@ -11,4 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 class Admin extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    public function blogs(){
+        return $this->hasMany(Blog::class);
+    }
 }

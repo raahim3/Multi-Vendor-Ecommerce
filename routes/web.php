@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,7 @@ Route::get('/logout', function () {
 });
 
 Route::get('/',[HomeController::class,'index']);
+Route::get('/blog/{slug}',[BlogController::class,'detail'])->name('blog.detail');
 
 Auth::routes(['verify' => true]);
 
