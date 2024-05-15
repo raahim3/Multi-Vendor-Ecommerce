@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 15, 2024 at 05:01 PM
+-- Generation Time: May 15, 2024 at 07:29 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -81,7 +81,9 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`id`, `title`, `slug`, `image`, `description`, `content`, `is_featured`, `likes`, `views`, `status`, `meta_title`, `meta_description`, `meta_keywords`, `admin_id`, `blog_category_id`, `blog_sub_category_id`, `created_at`, `updated_at`) VALUES
-(4, 'Test Blog 1', 'test-blog-1', '822221144.blog_img03.jpg', 'Blog', '<p>Blog<br></p>', NULL, NULL, NULL, 1, 'Blog', 'Blog', 'Blog', 1, 2, 1, '2024-05-15 23:26:10', '2024-05-15 23:58:36');
+(4, 'The New Sony Solo The Cinematic Dream Brings', 'the-new-sony-solo-the-cinematic-dream-brings', '822221144.blog_img03.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Blog<br></p>', NULL, NULL, NULL, 1, 'Blog', 'Blog', 'Blog', 1, 2, 1, '2024-05-15 23:26:10', '2024-05-16 01:30:31'),
+(5, 'Closeup Of Woman Hands Buying Online With Credit Card', 'closeup-of-woman-hands-buying-online-with-credit-card', '1860368210.inner-blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', NULL, NULL, NULL, 1, 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 1, 2, 1, '2024-05-16 01:31:54', '2024-05-16 01:31:54'),
+(6, 'Joyful Father And Son Having Fun Spending Tim', 'joyful-father-and-son-having-fun-spending-tim', '1276934611.blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', NULL, NULL, NULL, 1, 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 1, 2, 1, '2024-05-16 01:32:34', '2024-05-16 01:32:34');
 
 -- --------------------------------------------------------
 
@@ -551,7 +553,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `blog_categories`
