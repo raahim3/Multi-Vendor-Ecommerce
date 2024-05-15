@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('title')
-    Edit Product
+    Edit Blog
 @endsection
 @section('admin_content')
 <style>
@@ -25,74 +25,40 @@
         <div class="card">
           <div class="card-header pb-0">
             <div class="d-flex align-items-center">
-              <p class="mb-0">Edit Product</p>
+              <p class="mb-0">Edit Blog</p>
             </div>
           </div>
           <div class="card-body">
-            <form action="{{ route('admin.product.update',$product->id ) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.blogs.update',$blog->id ) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
             <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Main Image</label>
-                    <input class="form-control dropify" type="file" name="image" data-default-file="{{ asset('product_image'.'/'.$product->image) }}">
+                    <input class="form-control dropify" type="file" name="image" data-default-file="{{ asset('blog_image'.'/'.$blog->image) }}">
                     @error('image')
                       <span class="validated_txt">{{ $message }}</span>
                     @enderror
                   </div>
                 </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Sub Images</label>
-                    <input class="form-control dropify" type="file" name="more_images[]" multiple>
-                    @error('more_images')
-                      <span class="validated_txt">{{ $message }}</span>
-                    @enderror
-                  </div>
-                    <div class="row">
-                        @foreach($product->images as $image)
-                            <div class='sub_images'>
-                                <button type="button" class="sub_images_delete p-0" data-id="{{ $image->id }}" data-url="{{ route('admin.product.delete_sub_cate_image') }}"><i class="fa fa-close text-danger"></i></button>
-                                <img src="{{ asset('product_image'.'/'.$image->image) }}" height="auto" width="100px">
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+                
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">Title</label>
-                  <input class="form-control" type="text" value="{{$product->title}}" name="title">
+                  <input class="form-control" type="text" value="{{$blog->title}}" name="title">
                     @error('title')
                         <span class="validated_txt">{{ $message }}</span>
                     @enderror
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">Price</label>
-                  <input class="form-control" type="number" value="{{$product->price}}" name="price">
-                  @error('price')
-                    <span class="validated_txt">{{ $message }}</span>
-                  @enderror
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">Quantity</label>
-                  <input class="form-control" type="number" value="{{$product->quantity}}" name="quantity">
-                  @error('quantity')
-                    <span class="validated_txt">{{ $message }}</span>
-                  @enderror
-                </div>
-              </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Category</label>
-                <select class="form-control" name="category_id" id="category_id" data-url="{{route('admin.product.get_sub_categories')}}" data-sub_cate_id="{{$product->sub_category_id}}">
+                <select class="form-control" name="category_id" id="category_id" data-url="{{route('admin.blog.get_sub_categories')}}" data-sub_cate_id="{{$blog->blog_sub_category_id}}">
                     <option selected disabled>Select Category</option>
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}" @if($category->id == $product->category_id ) selected @endif >{{ $category->title }}</option>
+                        <option value="{{ $category->id }}" @if($category->id == $blog->blog_category_id ) selected @endif >{{ $category->title }}</option>
                     @endforeach
                 </select>
               </div>
@@ -110,18 +76,26 @@
                 <label for="example-text-input" class="form-control-label">Status</label>
                 <select class="form-control" name="status" required >
                     <option selected disabled>Select Status</option>
-                    <option value="1" @if($product->status == 1) selected @endif>Published</option>
-                    <option value="0"  @if($product->status == 0) selected @endif>Draft</option>
+                    <option value="1" @if($blog->status == 1) selected @endif>Published</option>
+                    <option value="0"  @if($blog->status == 0) selected @endif>Draft</option>
                 </select>
               </div>
             </div>
-
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label">Description</label>
+                <textarea class="form-control"  name="description">{{ $blog->description }}</textarea>
+                  @error('description')
+                      <span class="validated_txt">{{ $message }}</span>
+                  @enderror
+              </div>
+            </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">Description</label>
-                 <textarea class="summernote" name="description">{{ $product->description }}</textarea>
+                  <label for="example-text-input" class="form-control-label">Content</label>
+                 <textarea class="summernote" name="content">{!! $blog->content !!}</textarea>
                 </div>
-                @error('description')
+                @error('content')
                     <span class="validated_txt">{{ $message }}</span>
                   @enderror
               </div>
@@ -131,7 +105,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">Meta Title</label>
-                  <input class="form-control" type="text" value="{{$product->meta_title}}" name="meta_title">
+                  <input class="form-control" type="text" value="{{$blog->meta_title}}" name="meta_title">
                   @error('meta_title')
                     <span class="validated_txt">{{ $message }}</span>
                   @enderror
@@ -140,7 +114,7 @@
                <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">Meta description</label>
-                  <textarea class="form-control" type="text" name="meta_description">{{$product->meta_description}}</textarea>
+                  <textarea class="form-control" type="text" name="meta_description">{{$blog->meta_description}}</textarea>
                   @error('meta_description')
                     <span class="validated_txt">{{ $message }}</span>
                   @enderror
@@ -149,14 +123,14 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">Meta Keywords</label>
-                  <input class="form-control" type="text" value="{{$product->meta_keywords}}" name="meta_keywords">
+                  <input class="form-control" type="text" value="{{$blog->meta_keywords}}" name="meta_keywords">
                   @error('meta_keywords')
                     <span class="validated_txt">{{ $message }}</span>
                   @enderror
                 </div>
               </div>
             </div>
-              <button class="btn btn-primary btn-sm ms-auto float-end" type="submit">Save</button>
+              <button class="btn btn-primary btn-sm ms-auto float-end" type="submit">Update</button>
             </form>
           </div>
         </div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Setting\SmtpController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VendorController;
+use App\Http\Controllers\Vendor\ProductController as VendorProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,10 +45,13 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('delete_sub_cate_image',[ProductController::class,'delete_sub_cate_image'])->name('product.delete_sub_cate_image');
 
         //Blog Category Route
-            Route::resource('blogs', BlogController::class);
+        Route::resource('post/blogs', BlogController::class);
+        Route::get('get_blog_sub_categories',[BlogController::class,'get_sub_categories'])->name('blog.get_sub_categories');
+        Route::get('change_blog_status',[BlogController::class,'change_blog_status'])->name('blog.change_product_status');
+
         Route::name('blog.')->group(function(){
-            Route::resource('blogs/categories', BlogCategoryController::class);
-            Route::resource('blogs/sub_categories', BlogSubCategoryController::class);
+            Route::resource('post/blog/category', BlogCategoryController::class);
+            Route::resource('post/blog/sub_category', BlogSubCategoryController::class);
         });
 
     });

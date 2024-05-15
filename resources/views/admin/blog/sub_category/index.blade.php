@@ -11,7 +11,7 @@
                                 <h6>Blog Sub Categories Table</h6>
                             </div>
                             <div>
-                                <a class="btn btn-primary btn-sm" href="{{ route('admin.blog.sub_categories.create') }}"> <i class="fa fa-plus"></i> Add Sub Category</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('admin.blog.sub_category.create') }}"> <i class="fa fa-plus"></i> Add Sub Category</a>
                             </div>
                         </div>
                     </div>
@@ -48,11 +48,11 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $sub_category->blog_category->title }}</p>
                                             </td>
                                             <td class="align-middle d-flex">
-                                                <a href="{{ route('admin.blog.sub_categories.edit', $sub_category->id) }}" class="btn text-secondary font-weight-bold text-xs"
+                                                <a href="{{ route('admin.blog.sub_category.edit', $sub_category->id) }}" class="btn text-secondary font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>&nbsp;
-                                                <form action="{{ route('admin.blog.sub_categories.destroy', $sub_category->id) }}" method="post">
+                                                <form action="{{ route('admin.blog.sub_category.destroy', $sub_category->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                     <button type="submit" class="text-danger font-weight-bold text-xs btn"

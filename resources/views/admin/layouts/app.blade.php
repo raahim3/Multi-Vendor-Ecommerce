@@ -211,14 +211,14 @@
                                     <span class="sidenav-normal"> All Blogs </span>
                                 </a>
                             </li>
-                            <li class="nav-item {{ Request::is('admin/blogs') ? 'active' : '' }} " wire:navigate>
-                                <a class="nav-link " href="{{ route('admin.blog.categories.index') }}">
+                            <li class="nav-item {{ Request::is('admin/blogs/category') ? 'active' : '' }} " >
+                                <a class="nav-link " href="{{ route('admin.blog.category.index') }}" key="shvhvf">
                                     <span class="sidenav-mini-icon"> S </span>
                                     <span class="sidenav-normal"> All Category </span>
                                 </a>
                             </li>
-                            <li class="nav-item {{ Request::is('admin/blogs/sub_categories') ? 'active' : '' }} ">
-                                <a class="nav-link " href="{{ route('admin.blog.sub_categories.index') }}" wire:navigate>
+                            <li class="nav-item {{ Request::is('admin/blogs/sub_category') ? 'active' : '' }} ">
+                                <a class="nav-link " href="{{ route('admin.blog.sub_category.index') }}" wire:navigate>
                                     <span class="sidenav-mini-icon"> S </span>
                                     <span class="sidenav-normal"> All Sub Category </span>
                                 </a>
@@ -522,9 +522,9 @@
         </div>
     </div>
 
+    @include('admin.partials.script');
 
     @yield('admin_script');
-    @include('admin.partials.script');
     @livewireScripts
 
 

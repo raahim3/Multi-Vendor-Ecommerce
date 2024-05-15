@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
-class ProductController extends Controller
+class BlogControllerProductController extends Controller
 {
     /**
      * Display a listing of the resource.

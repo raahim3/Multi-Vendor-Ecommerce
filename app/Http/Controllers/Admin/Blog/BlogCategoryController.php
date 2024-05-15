@@ -40,7 +40,7 @@ class BlogCategoryController extends Controller
         $category->title = $request->title;
         $category->slug = Str::slug($request->title);
         $category->save();
-        return redirect()->route('admin.blog.categories.index')->with('success', 'Blog Category has been created successfully');
+        return redirect()->route('admin.blog.category.index')->with('success', 'Blog Category has been created successfully');
     }
 
     /**
@@ -73,7 +73,7 @@ class BlogCategoryController extends Controller
         $category->title = $request->title;
         $category->slug = Str::slug($request->title);
         $category->update();
-        return redirect()->route('admin.blog.categories.index')->with('success', 'Blog Category has been updated successfully');
+        return redirect()->route('admin.blog.category.index')->with('success', 'Blog Category has been updated successfully');
     }
 
     /**

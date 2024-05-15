@@ -12,4 +12,8 @@ class BlogCategory extends Model
     {
         return $this->hasMany(BlogSubCategory::class);
     }
+    public function blog()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }

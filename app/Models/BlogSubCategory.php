@@ -12,4 +12,9 @@ class BlogSubCategory extends Model
     {
         return $this->belongsTo(BlogCategory::class);
     }
+    
+    public function blog()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }

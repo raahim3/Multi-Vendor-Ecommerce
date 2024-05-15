@@ -47,7 +47,7 @@ class BlogSubCategoryController extends Controller
             $sub_category->blog_category_id = $request->category_id;
             $sub_category->save();
         }
-        return redirect()->route('admin.blog.sub_categories.index')->with('success', 'Blog Sub Category has been created successfully');
+        return redirect()->route('admin.blog.sub_category.index')->with('success', 'Blog Sub Category has been created successfully');
     
     }
 
@@ -86,7 +86,7 @@ class BlogSubCategoryController extends Controller
         $sub_category->slug = Str::slug($request->title);
         $sub_category->blog_category_id = $request->category_id;
         $sub_category->update();
-        return redirect()->route('admin.blog.sub_categories.index')->with('success', 'Blog Sub Category has been updated successfully');
+        return redirect()->route('admin.blog.sub_category.index')->with('success', 'Blog Sub Category has been updated successfully');
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'All Products')
+@section('title', 'All Blogs')
 @section('admin_content')
     <div class="container-fluid py-4">
         <div class="row">
@@ -8,10 +8,10 @@
                     <div class="card-header pb-0">
                         <div class="d-flex justify-content-between w-100">
                             <div>
-                                <h6>Products Table</h6>
+                                <h6>Blogs Table</h6>
                             </div>
                             <div>
-                                <a class="btn btn-primary btn-sm" href="{{ route('admin.product.create') }}"> <i class="fa fa-plus"></i> Add Product</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('admin.blogs.create') }}"> <i class="fa fa-plus"></i> Add Blog</a>
                             </div>
                         </div>
                     </div>
@@ -38,34 +38,34 @@
                                     @php
                                         $serial = 1;
                                     @endphp
-                                    @foreach ($products as $product)
+                                    @foreach ($blogs as $blog)
                                         <tr>
                                             <td class="p-4"><p class="text-xs font-weight-bold mb-0">{{ $serial++ }}</p></td>
                                             <td>
-                                                <img src="{{ asset('product_image/'. $product->image)}}" height="100px" width="auto" alt="">
+                                                <img src="{{ asset('blog_image/'. $blog->image)}}" height="100px" width="auto" alt="">
                                             </td>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $product->title }}</h6>
+                                                        <h6 class="mb-0 text-sm">{{ $blog->title }}</h6>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                hj
+                                                {{ $blog->blog_sub_category->title }}
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <select name="status" class="changeProductStatus  form-select" data-id="{{ $product->id }}" data-url="{{ route('vendor.product.change_product_status') }}">
-                                                    <option value="1" {{ $product->status == '1' ? 'selected' : '' }}>Published</option>
-                                                    <option value="0" {{ $product->status == '0' ? 'selected' : '' }}>Draft</option>
+                                                <select name="status" class="changeBlogStatus  form-select" data-id="{{ $blog->id }}" data-url="{{ route('admin.blog.change_product_status') }}">
+                                                    <option value="1" {{ $blog->status == '1' ? 'selected' : '' }}>Published</option>
+                                                    <option value="0" {{ $blog->status == '0' ? 'selected' : '' }}>Draft</option>
                                                 </select>
                                             </td>
                                             <td class="align-middle ">
-                                                <a href="{{ route('admin.product.edit', $product->id) }}" class="btn text-secondary font-weight-bold text-xs"
+                                                <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="btn text-secondary font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>&nbsp;
-                                                <form action="{{ route('admin.product.destroy', $product->id) }}" method="post">
+                                                <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                     <button type="submit" class="text-danger font-weight-bold text-xs btn"
@@ -81,7 +81,7 @@
                             </table>
                             <div class="w-100 d-flex justify-content-end p-3">
                                 <div>
-                                    {{ $products->links() }}
+                                    {{ $blogs->links() }}
                                 </div>
                             </div>
 

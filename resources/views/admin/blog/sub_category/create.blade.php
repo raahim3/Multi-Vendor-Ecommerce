@@ -12,7 +12,7 @@
           </div>
           <div class="card-body">
 
-            <form action="{{ route('admin.blog.sub_categories.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.blog.sub_category.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="row">

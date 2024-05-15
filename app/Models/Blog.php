@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
+
+    public function blog_category(){
+        return $this->belongsTo(BlogCategory::class);
+    }
+
+    public function blog_sub_category(){
+        return $this->belongsTo(BlogSubCategory::class);
+    }
 }
