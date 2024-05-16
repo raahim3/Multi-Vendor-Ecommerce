@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\BlogComment;
 use App\Models\BlogLike;
 use App\Models\BlogSubCategory;
 use Illuminate\Http\Request;
@@ -49,5 +50,29 @@ class BlogController extends Controller
             $blog = Blog::with('likes')->find($request->blog_id);
             return response()->json(['status'=>'store','like_id'=>$like->id,'likes'=>count($blog->likes)]);  
         }
+
+    }
+    public function commentStore(Request $request){
+
+        if($request->name == null || $request->name == "" && $request->email == null || $request->email == "" && $request->comment == null || $request->comment == ""){
+            return response()->json(['status'=>'error','message'=>'All Fields is required']);  
+        }
+        $comment = new BlogComment();
+        $comment->blog_id = $request->blog_id;
+        if (auth()->guard('vendor')->user()) {
+            $comment->vendor_id = $request->vendor_id;
+        }else if (auth()->guard('admin')->user()) {
+            $comment->admin_id = $request->admin_id;
+        }else{
+            $comment->user_id = $request->user_id;
+        }
+        $comment->name = $request->name;
+        $comment->email = $request->email;
+        $comment->comment = $request->comment;
+        $comment->status = 0;
+        $comment->save();
+        return response()->json(['status'=>'success']);  
+
+
     }
 }

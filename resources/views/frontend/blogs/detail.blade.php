@@ -82,18 +82,28 @@
                         <div class="blog-comment-box">
                             <h3 class="title">LEAVE A COMMENT</h3>
                             <p>Your email address will not be published. Required fields are marked *</p>
-                            <form action="#">
-                                <textarea name="comment" placeholder="Your Comment"></textarea>
+                            <div class="alert alert-success d-none" id="commentSuccess" role="alert"></div>
+                            <div class="alert alert-danger d-none" id="commentError" role="alert"></div>
+                            <form>
+                                <textarea name="comment" placeholder="Your Comment" required></textarea>
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <input type="text" placeholder="Your Name *">
+                                        <input type="text" placeholder="Your Name *" name="name" required 
+                                        value="{{auth()->check() ? auth()->user()->name : (auth()->guard('vendor')->check() ? auth()->guard('vendor')->user()->name : (auth()->guard('admin')->check() ? auth()->guard('admin')->user()->name : ''))}}"
+                                        {{auth()->check() ? 'readonly' : (auth()->guard('vendor')->check() ? 'readonly' : (auth()->guard('admin')->check() ? 'readonly' : ''))}}>
+                                        <input type="hidden" value="{{$blog->id}}" name="blog_id">
+                                        <input type="hidden" value="{{ auth()->guard('vendor')->check() ? auth()->guard('vendor')->user()->id : "" }}" name="vendor_id">
+                                        <input type="hidden" value="{{ auth()->guard('admin')->check() ? auth()->guard('admin')->user()->id : "" }}" name="admin_id">
+                                        <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : "" }}" name="user_id">
                                     </div>
                                     <div class="col-lg-6">
-                                        <input type="email" placeholder="Your Email *">
+                                        <input type="email" placeholder="Your Email *" name="email" required 
+                                        value="{{auth()->check() ? auth()->user()->email : (auth()->guard('vendor')->check() ? auth()->guard('vendor')->user()->email : (auth()->guard('admin')->check() ? auth()->guard('admin')->user()->email : ''))}}"
+                                        {{auth()->check() ? 'readonly' : (auth()->guard('vendor')->check() ? 'readonly' : (auth()->guard('admin')->check() ? 'readonly' : ''))}}>
                                     </div>
                                 </div>
-                                <button type="submit">submit</button>
-                            </form>
+                                <button type="button" id="commentStore">submit</button>
+                            {{-- </form> --}}
                         </div>
                     </div>
                     <div class="col-4">
@@ -190,11 +200,11 @@
 
 @section('script')
     <script>
-        $(document).on('click','#storeLike',function () {
            let user_id = "{{ auth()->check() && auth()->user()->id }}";
            let vendor_id = "{{ auth()->guard('vendor')->check() && auth()->guard('vendor')->user()->id }}";
            let admin_id = "{{ auth()->guard('admin')->check() && auth()->guard('admin')->user()->id }}";
            let blog_id = "{{ $blog->id }}";
+        $(document).on('click','#storeLike',function () {
            let like_id = $(this).data('like_id') ?? null;
            if(user_id == null || admin_id == null || vendor_id == null)
            {
@@ -221,6 +231,29 @@
                 });
            }
         });
+
+        $(document).on('click','#commentStore',function(e){
+            e.preventDefault();
+            let name = $('input[name="name"]').val();
+            let email = $('input[name="email"]').val();
+            let comment = $('textarea[name="comment"]').val();
+                $.ajax({
+                    url:"{{ route('blog.comment.store') }}",
+                    method:"GET",
+                    data:{name,email,comment,user_id,vendor_id,admin_id,blog_id},
+                    success:function(response){
+                        if(response.status == 'success'){
+                            $('#commentError').addClass('d-none');
+                            $('#commentSuccess').removeClass('d-none').text('Your comment will appear once the admin has approved it.');
+                        }
+                        if(response.status == 'error'){
+                            $('#commentSuccess').addClass('d-none');
+                            $('#commentError').removeClass('d-none').text(response.message);
+                        }
+                    }
+                });
+        });
+
     </script>
 @endsection
 @endsection
