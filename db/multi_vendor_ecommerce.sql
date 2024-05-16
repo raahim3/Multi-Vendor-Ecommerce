@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 15, 2024 at 07:29 PM
+-- Generation Time: May 16, 2024 at 07:49 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `id` bigint UNSIGNED NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci,
   `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -46,8 +47,8 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `first_name`, `last_name`, `phone`, `address`, `country`, `city`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Ad', 'Min', NULL, NULL, NULL, NULL, 'admin@gmail.com', '$2y$10$.sY3uC2u9e2MCAS3VlAJeeApaYcnFkWF1qXnz025U1AYAlba22cxC', NULL, NULL, NULL);
+INSERT INTO `admins` (`id`, `name`, `first_name`, `last_name`, `phone`, `address`, `country`, `city`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Ad Min', 'Ad', 'Min', NULL, NULL, NULL, NULL, 'admin@gmail.com', '$2y$10$.sY3uC2u9e2MCAS3VlAJeeApaYcnFkWF1qXnz025U1AYAlba22cxC', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,6 @@ CREATE TABLE `blogs` (
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_featured` int DEFAULT NULL,
-  `likes` bigint DEFAULT NULL,
   `views` bigint DEFAULT NULL,
   `status` int DEFAULT NULL,
   `meta_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -80,10 +80,10 @@ CREATE TABLE `blogs` (
 -- Dumping data for table `blogs`
 --
 
-INSERT INTO `blogs` (`id`, `title`, `slug`, `image`, `description`, `content`, `is_featured`, `likes`, `views`, `status`, `meta_title`, `meta_description`, `meta_keywords`, `admin_id`, `blog_category_id`, `blog_sub_category_id`, `created_at`, `updated_at`) VALUES
-(4, 'The New Sony Solo The Cinematic Dream Brings', 'the-new-sony-solo-the-cinematic-dream-brings', '822221144.blog_img03.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Blog<br></p>', NULL, NULL, NULL, 1, 'Blog', 'Blog', 'Blog', 1, 2, 1, '2024-05-15 23:26:10', '2024-05-16 01:30:31'),
-(5, 'Closeup Of Woman Hands Buying Online With Credit Card', 'closeup-of-woman-hands-buying-online-with-credit-card', '1860368210.inner-blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', NULL, NULL, NULL, 1, 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 1, 2, 1, '2024-05-16 01:31:54', '2024-05-16 01:31:54'),
-(6, 'Joyful Father And Son Having Fun Spending Tim', 'joyful-father-and-son-having-fun-spending-tim', '1276934611.blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', NULL, NULL, NULL, 1, 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 1, 2, 1, '2024-05-16 01:32:34', '2024-05-16 01:32:34');
+INSERT INTO `blogs` (`id`, `title`, `slug`, `image`, `description`, `content`, `is_featured`, `views`, `status`, `meta_title`, `meta_description`, `meta_keywords`, `admin_id`, `blog_category_id`, `blog_sub_category_id`, `created_at`, `updated_at`) VALUES
+(4, 'The New Sony Solo The Cinematic Dream Brings', 'the-new-sony-solo-the-cinematic-dream-brings', '822221144.blog_img03.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Blog<br></p>', NULL, NULL, 1, 'Blog', 'Blog', 'Blog', 1, 2, 1, '2024-05-15 23:26:10', '2024-05-16 01:30:31'),
+(5, 'Closeup Of Woman Hands Buying Online With Credit Card', 'closeup-of-woman-hands-buying-online-with-credit-card', '1860368210.inner-blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', NULL, NULL, 1, 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 1, 2, 1, '2024-05-16 01:31:54', '2024-05-16 01:31:54'),
+(6, 'Joyful Father And Son Having Fun Spending Tim', 'joyful-father-and-son-having-fun-spending-tim', '1276934611.blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', NULL, NULL, 1, 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 1, 2, 1, '2024-05-16 01:32:34', '2024-05-16 01:32:34');
 
 -- --------------------------------------------------------
 
@@ -105,6 +105,68 @@ CREATE TABLE `blog_categories` (
 
 INSERT INTO `blog_categories` (`id`, `title`, `slug`, `created_at`, `updated_at`) VALUES
 (2, 'Sports', 'sports', '2024-05-14 01:50:12', '2024-05-14 01:50:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_comments`
+--
+
+CREATE TABLE `blog_comments` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `blog_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `vendor_id` bigint UNSIGNED DEFAULT NULL,
+  `admin_id` bigint UNSIGNED DEFAULT NULL,
+  `status` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blog_comments`
+--
+
+INSERT INTO `blog_comments` (`id`, `name`, `email`, `comment`, `blog_id`, `user_id`, `vendor_id`, `admin_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Ad Min', 'admin@gmail.com', 'Nice...', 6, NULL, NULL, 1, 0, '2024-05-17 02:23:05', '2024-05-17 02:23:05'),
+(2, 'Ad Min', 'admin@gmail.com', 'sdfsdf', 6, NULL, NULL, 1, 0, '2024-05-17 02:24:23', '2024-05-17 02:24:23'),
+(3, 'Ad Min', 'admin@gmail.com', 'Nice', 6, NULL, NULL, 1, 0, '2024-05-17 02:33:25', '2024-05-17 02:33:25'),
+(4, 'Ad Min', 'admin@gmail.com', 'Nice', 6, NULL, NULL, 1, 0, '2024-05-17 02:33:26', '2024-05-17 02:33:26'),
+(5, 'Ad Min', 'admin@gmail.com', 'Nice', 6, NULL, NULL, 1, 0, '2024-05-17 02:33:36', '2024-05-17 02:33:36'),
+(6, 'Ad Min', 'admin@gmail.com', 'Nice', 6, NULL, NULL, 1, 0, '2024-05-17 02:33:37', '2024-05-17 02:33:37'),
+(7, 'Ad Min', 'admin@gmail.com', 'v', 6, NULL, NULL, 1, 0, '2024-05-17 02:34:52', '2024-05-17 02:34:52'),
+(8, 'Ad Min', 'admin@gmail.com', 'v', 6, NULL, NULL, 1, 0, '2024-05-17 02:34:52', '2024-05-17 02:34:52'),
+(9, 'Ad Min', 'admin@gmail.com', 'xz', 6, NULL, NULL, 1, 0, '2024-05-17 02:36:03', '2024-05-17 02:36:03'),
+(10, 'Ad Min', 'admin@gmail.com', 'werwer', 6, NULL, NULL, 1, 0, '2024-05-17 02:46:36', '2024-05-17 02:46:36'),
+(11, 'Ad Min', 'admin@gmail.com', 'xcvxc', 6, NULL, NULL, 1, 0, '2024-05-17 02:48:18', '2024-05-17 02:48:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_likes`
+--
+
+CREATE TABLE `blog_likes` (
+  `id` bigint UNSIGNED NOT NULL,
+  `blog_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `vendor_id` bigint UNSIGNED DEFAULT NULL,
+  `admin_id` bigint UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blog_likes`
+--
+
+INSERT INTO `blog_likes` (`id`, `blog_id`, `user_id`, `vendor_id`, `admin_id`, `created_at`, `updated_at`) VALUES
+(8, 6, NULL, NULL, 1, '2024-05-17 01:18:58', '2024-05-17 01:18:58'),
+(16, 5, NULL, NULL, 1, '2024-05-17 01:34:13', '2024-05-17 01:34:13'),
+(17, 4, NULL, NULL, 1, '2024-05-17 01:34:24', '2024-05-17 01:34:24');
 
 -- --------------------------------------------------------
 
@@ -228,7 +290,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2024_03_31_172857_create_product_images_table', 2),
 (14, '2024_05_13_174935_create_blog_categories_table', 3),
 (15, '2024_05_13_174941_create_blog_sub_categories_table', 3),
-(17, '2024_05_13_174945_create_blogs_table', 4);
+(17, '2024_05_13_174945_create_blogs_table', 4),
+(18, '2024_05_16_163526_create_blog_likes_table', 5),
+(19, '2024_05_16_183612_create_blog_comments_table', 6);
 
 -- --------------------------------------------------------
 
@@ -446,6 +510,26 @@ ALTER TABLE `blog_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `blog_comments`
+--
+ALTER TABLE `blog_comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `blog_comments_blog_id_foreign` (`blog_id`),
+  ADD KEY `blog_comments_user_id_foreign` (`user_id`),
+  ADD KEY `blog_comments_vendor_id_foreign` (`vendor_id`),
+  ADD KEY `blog_comments_admin_id_foreign` (`admin_id`);
+
+--
+-- Indexes for table `blog_likes`
+--
+ALTER TABLE `blog_likes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `blog_likes_blog_id_foreign` (`blog_id`),
+  ADD KEY `blog_likes_user_id_foreign` (`user_id`),
+  ADD KEY `blog_likes_vendor_id_foreign` (`vendor_id`),
+  ADD KEY `blog_likes_admin_id_foreign` (`admin_id`);
+
+--
 -- Indexes for table `blog_sub_categories`
 --
 ALTER TABLE `blog_sub_categories`
@@ -562,6 +646,18 @@ ALTER TABLE `blog_categories`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `blog_comments`
+--
+ALTER TABLE `blog_comments`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `blog_likes`
+--
+ALTER TABLE `blog_likes`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `blog_sub_categories`
 --
 ALTER TABLE `blog_sub_categories`
@@ -589,7 +685,7 @@ ALTER TABLE `generals`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -644,6 +740,24 @@ ALTER TABLE `blogs`
   ADD CONSTRAINT `blogs_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `blogs_blog_category_id_foreign` FOREIGN KEY (`blog_category_id`) REFERENCES `blog_categories` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `blogs_blog_sub_category_id_foreign` FOREIGN KEY (`blog_sub_category_id`) REFERENCES `blog_sub_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `blog_comments`
+--
+ALTER TABLE `blog_comments`
+  ADD CONSTRAINT `blog_comments_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `blog_comments_blog_id_foreign` FOREIGN KEY (`blog_id`) REFERENCES `blogs` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `blog_comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `blog_comments_vendor_id_foreign` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `blog_likes`
+--
+ALTER TABLE `blog_likes`
+  ADD CONSTRAINT `blog_likes_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `blog_likes_blog_id_foreign` FOREIGN KEY (`blog_id`) REFERENCES `blogs` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `blog_likes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `blog_likes_vendor_id_foreign` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `blog_sub_categories`
