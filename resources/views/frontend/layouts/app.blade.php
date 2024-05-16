@@ -55,6 +55,7 @@
   <script src="{{ asset('frontend_assets/js/slick.min.js') }}"></script>
   <script src="{{ asset('frontend_assets/js/wow.min.js') }}"></script>
   <script src="{{ asset('frontend_assets/js/main.js') }}"></script>
+  @yield('script')
   @livewireScripts
 </body>
 

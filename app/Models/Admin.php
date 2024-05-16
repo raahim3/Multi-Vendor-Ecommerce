@@ -15,4 +15,7 @@ class Admin extends Authenticatable implements MustVerifyEmail
     public function blogs(){
         return $this->hasMany(Blog::class);
     }
+    public function likes(){
+        return $this->hasMany(BlogLike::class);
+    }
 }

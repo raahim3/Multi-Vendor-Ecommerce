@@ -6341,3 +6341,9 @@ label {
         transform: rotate(360deg);
     }
 }
+#storeLike{
+    cursor: pointer;
+}
+#storeLike.active{
+    color: #ff4800;
+}

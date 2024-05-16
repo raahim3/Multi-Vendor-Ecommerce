@@ -22,6 +22,7 @@ Route::get('/logout', function () {
 
 Route::get('/',[HomeController::class,'index']);
 Route::get('/blog/{slug}',[BlogController::class,'detail'])->name('blog.detail');
+Route::get('/blog/like/store',[BlogController::class,'likeStore'])->name('blog.like.store');
 
 Auth::routes(['verify' => true]);
 

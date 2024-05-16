@@ -19,4 +19,7 @@ class Blog extends Model
     public function admin(){
         return $this->belongsTo(Admin::class);
     }
+    public function likes(){
+        return $this->hasMany(BlogLike::class);
+    }
 }

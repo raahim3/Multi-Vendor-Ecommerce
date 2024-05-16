@@ -46,8 +46,8 @@
                                 <div>
                                     {!! $blog->content !!}
                                 </div>
-                                <div class="blog-details-tag-wrap">
-                                    <div class="blog-details-tag-list">
+                                <div class="blog-details-tag-wrap justify-content-end">
+                                    {{-- <div class="blog-details-tag-list">
                                         <ul>
                                             <li class="title">Tag post :</li>
                                             <li><a href="#">Lifestyle,</a></li>
@@ -55,11 +55,11 @@
                                             <li><a href="#">who,</a></li>
                                             <li><a href="#">arts</a></li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
                                     <div class="blog-details-comment">
                                         <ul>
                                             <li><a href="#"><i class="fa-regular fa-message"></i>05</a></li>
-                                            <li><a href="#"><i class="fa-regular fa-heart"></i>13</a></li>
+                                            <li><p class="m-0 {{ $isLike && $isLike->id ? 'active' : '' }}" id="storeLike" data-like_id="{{$isLike && $isLike->id ? $isLike->id : ''}}"><i class="fa-regular fa-heart"></i> <span id="likes">{{ count($blog->likes) }}</span></p></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="widget mb-45">
+                            {{-- <div class="widget mb-45">
                                 <div class="blog-widget-title text-center mb-20">
                                     <h4 class="title">Tag post
                                         <span class="left-border"></span>
@@ -156,7 +156,7 @@
                                         <li><a href="#">arts</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </aside>
                     </div>
                 </div>
@@ -188,5 +188,39 @@
     </main>
 <!-- main-area-end -->
 
-       
+@section('script')
+    <script>
+        $(document).on('click','#storeLike',function () {
+           let user_id = "{{ auth()->check() && auth()->user()->id }}";
+           let vendor_id = "{{ auth()->guard('vendor')->check() && auth()->guard('vendor')->user()->id }}";
+           let admin_id = "{{ auth()->guard('admin')->check() && auth()->guard('admin')->user()->id }}";
+           let blog_id = "{{ $blog->id }}";
+           let like_id = $(this).data('like_id') ?? null;
+           if(user_id == null || admin_id == null || vendor_id == null)
+           {
+                window.location.href="{{ route('login') }}";
+           }
+           else{
+                $.ajax({
+                    url:"{{ route('blog.like.store') }}",
+                    method:"GET",
+                    data:{user_id:user_id,blog_id:blog_id,vendor_id:vendor_id,admin_id:admin_id,like_id:like_id},
+                    success:function(response){
+                        // console.log(response);
+                        if(response.status == 'store'){
+                            $('#storeLike').data('like_id',response.like_id);
+                            $('#storeLike').addClass('active');
+                            $('#likes').text(response.likes);
+                        }
+                        if(response.status == 'unlike'){
+                            $('#storeLike').data('like_id',' ');
+                            $('#storeLike').removeClass('active');
+                            $('#likes').text(response.likes);
+                        }
+                    }
+                });
+           }
+        });
+    </script>
+@endsection
 @endsection
