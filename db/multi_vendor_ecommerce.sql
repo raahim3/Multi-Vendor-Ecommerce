@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 16, 2024 at 07:49 PM
+-- Generation Time: May 17, 2024 at 07:50 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -81,9 +81,9 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`id`, `title`, `slug`, `image`, `description`, `content`, `is_featured`, `views`, `status`, `meta_title`, `meta_description`, `meta_keywords`, `admin_id`, `blog_category_id`, `blog_sub_category_id`, `created_at`, `updated_at`) VALUES
-(4, 'The New Sony Solo The Cinematic Dream Brings', 'the-new-sony-solo-the-cinematic-dream-brings', '822221144.blog_img03.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Blog<br></p>', NULL, NULL, 1, 'Blog', 'Blog', 'Blog', 1, 2, 1, '2024-05-15 23:26:10', '2024-05-16 01:30:31'),
-(5, 'Closeup Of Woman Hands Buying Online With Credit Card', 'closeup-of-woman-hands-buying-online-with-credit-card', '1860368210.inner-blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', NULL, NULL, 1, 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 1, 2, 1, '2024-05-16 01:31:54', '2024-05-16 01:31:54'),
-(6, 'Joyful Father And Son Having Fun Spending Tim', 'joyful-father-and-son-having-fun-spending-tim', '1276934611.blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', NULL, NULL, 1, 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 1, 2, 1, '2024-05-16 01:32:34', '2024-05-16 01:32:34');
+(4, 'The New Sony Solo The Cinematic Dream Brings', 'the-new-sony-solo-the-cinematic-dream-brings', '822221144.blog_img03.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Blog<br></p>', 1, NULL, 1, 'Blog', 'Blog', 'Blog', 1, 2, 1, '2024-05-15 23:26:10', '2024-05-18 01:32:36'),
+(5, 'Closeup Of Woman Hands Buying Online With Credit Card', 'closeup-of-woman-hands-buying-online-with-credit-card', '1860368210.inner-blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', 1, NULL, 1, 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 'Closeup Of Woman Hands Buying Online With Credit Card', 1, 2, 1, '2024-05-16 01:31:54', '2024-05-18 01:32:26'),
+(6, 'Joyful Father And Son Having Fun Spending Tim', 'joyful-father-and-son-having-fun-spending-tim', '1276934611.blog_img02.jpg', 'Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.', '<p>Lorem Ipsum is simply dumy text the printing and industry orem Ipsum been industry\'s standard dummy.<br></p>', 1, NULL, 1, 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 'Joyful Father And Son Having Fun Spending Tim', 1, 2, 1, '2024-05-16 01:32:34', '2024-05-18 01:32:08');
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,17 @@ INSERT INTO `blog_comments` (`id`, `name`, `email`, `comment`, `blog_id`, `user_
 (8, 'Ad Min', 'admin@gmail.com', 'v', 6, NULL, NULL, 1, 0, '2024-05-17 02:34:52', '2024-05-17 02:34:52'),
 (9, 'Ad Min', 'admin@gmail.com', 'xz', 6, NULL, NULL, 1, 0, '2024-05-17 02:36:03', '2024-05-17 02:36:03'),
 (10, 'Ad Min', 'admin@gmail.com', 'werwer', 6, NULL, NULL, 1, 0, '2024-05-17 02:46:36', '2024-05-17 02:46:36'),
-(11, 'Ad Min', 'admin@gmail.com', 'xcvxc', 6, NULL, NULL, 1, 0, '2024-05-17 02:48:18', '2024-05-17 02:48:18');
+(11, 'Ad Min', 'admin@gmail.com', 'xcvxc', 6, NULL, NULL, 1, 0, '2024-05-17 02:48:18', '2024-05-17 02:48:18'),
+(12, 'Muhammad Rahim', 'raahim32006@gmail.com', 'Nice', 5, NULL, NULL, NULL, 0, '2024-05-18 00:48:57', '2024-05-18 00:48:57'),
+(13, 'Ad Min', 'admin@gmail.com', 'Nice', 4, NULL, NULL, 1, 0, '2024-05-18 01:48:38', '2024-05-18 01:48:38'),
+(14, 'Ad Min', 'admin@gmail.com', 'hello', 4, NULL, NULL, 1, 0, '2024-05-18 01:54:32', '2024-05-18 01:54:32'),
+(15, 'Ad Min', 'admin@gmail.com', '.', 4, NULL, NULL, 1, 0, '2024-05-18 01:56:07', '2024-05-18 01:56:07'),
+(16, 'Ad Min', 'admin@gmail.com', 's', 5, NULL, NULL, 1, 0, '2024-05-18 01:56:27', '2024-05-18 01:56:27'),
+(17, 'Ad Min', 'admin@gmail.com', 's', 5, NULL, NULL, 1, 1, '2024-05-18 01:56:57', '2024-05-18 02:45:18'),
+(18, 'Ad Min', 'admin@gmail.com', 's', 5, NULL, NULL, 1, 0, '2024-05-18 02:03:41', '2024-05-18 02:45:20'),
+(19, 'Ad Min', 'admin@gmail.com', 'z', 5, NULL, NULL, 1, 1, '2024-05-18 02:04:31', '2024-05-18 02:04:31'),
+(20, 'Ad Min', 'admin@gmail.com', 'niyc', 5, NULL, NULL, 1, 1, '2024-05-18 02:05:15', '2024-05-18 02:05:15'),
+(21, 'Ad Min', 'admin@gmail.com', 'ss', 5, NULL, NULL, 1, 1, '2024-05-18 02:05:43', '2024-05-18 02:49:35');
 
 -- --------------------------------------------------------
 
@@ -165,8 +175,9 @@ CREATE TABLE `blog_likes` (
 
 INSERT INTO `blog_likes` (`id`, `blog_id`, `user_id`, `vendor_id`, `admin_id`, `created_at`, `updated_at`) VALUES
 (8, 6, NULL, NULL, 1, '2024-05-17 01:18:58', '2024-05-17 01:18:58'),
-(16, 5, NULL, NULL, 1, '2024-05-17 01:34:13', '2024-05-17 01:34:13'),
-(17, 4, NULL, NULL, 1, '2024-05-17 01:34:24', '2024-05-17 01:34:24');
+(17, 4, NULL, NULL, 1, '2024-05-17 01:34:24', '2024-05-17 01:34:24'),
+(18, 5, NULL, NULL, NULL, '2024-05-18 00:44:32', '2024-05-18 00:44:32'),
+(19, 5, NULL, NULL, 1, '2024-05-18 02:18:13', '2024-05-18 02:18:13');
 
 -- --------------------------------------------------------
 
@@ -649,13 +660,13 @@ ALTER TABLE `blog_categories`
 -- AUTO_INCREMENT for table `blog_comments`
 --
 ALTER TABLE `blog_comments`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `blog_likes`
 --
 ALTER TABLE `blog_likes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `blog_sub_categories`
