@@ -16,7 +16,7 @@ class HomeController extends Controller
     
     public function index()
     {
-        $data['blogs'] = Blog::with('admin','blog_category','blog_sub_category')->where('status',1)->latest()->take(3)->get();
+        $data['blogs'] = Blog::with('admin','blog_category','blog_sub_category','comments')->where('status',1)->latest()->take(3)->get();
         return view('frontend.index',$data);
     }
 }

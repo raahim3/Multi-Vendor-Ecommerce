@@ -33,10 +33,12 @@
                     <div class="col-8">
                         <div class="inner-blog-item mb-50">
                             <div class="inner-blog-thumb">
-                                <img src="{{ asset('blog_image').'/'.$blog->image }}" alt="img">
+                                <img src="{{ asset('blog_image').'/'.$blog->image }}" alt="img" width="100%">
                             </div>
                             <div class="inner-blog-content">
-                                <a href="#" class="tag">FEATURED</a>
+                                @if ($blog->is_featured == 1)
+                                    <a href="javascript:void(0)l" class="tag">FEATURED</a>
+                                @endif
                                 <h2 class="title">{{ $blog->title }}</h2>
                                 <ul class="blog-meta">
                                     <li>By <a href="#">{{ $blog->admin->first_name.' '.$blog->admin->last_name }}</a></li>
@@ -58,7 +60,7 @@
                                     </div> --}}
                                     <div class="blog-details-comment">
                                         <ul>
-                                            <li><a href="#"><i class="fa-regular fa-message"></i>05</a></li>
+                                            <li><a href="#"><i class="fa-regular fa-message"></i><span id="commentCount">{{ count($blog->comments()->where('status',1)->get()) }}</span></a></li>
                                             <li><p class="m-0 {{ $isLike && $isLike->id ? 'active' : '' }}" id="storeLike" data-like_id="{{$isLike && $isLike->id ? $isLike->id : ''}}"><i class="fa-regular fa-heart"></i> <span id="likes">{{ count($blog->likes) }}</span></p></li>
                                         </ul>
                                     </div>
@@ -103,8 +105,27 @@
                                     </div>
                                 </div>
                                 <button type="button" id="commentStore">submit</button>
-                            {{-- </form> --}}
+                            </form>
                         </div>
+                        <div id="allComments" class="mt-5">
+                            <h4 class="title mb-3">COMMENTS</h4>
+                            <hr class="mt-3 mb-3">
+                            <ul id="allCommentsUl">
+                                @foreach ($blog->comments()->orderBy('id','desc')->take(8)->get() as $comment)
+                                    <li class="d-flex gap-2 border-bottom pb-3 mb-3">
+                                        <div>
+                                            <img src="{{ asset('default_avatar.jpg') }}" width="50px" height="50px" class="rounded-circle" alt="">
+                                        </div>
+                                        <div>
+                                            <p class="m-0"><strong>{{$comment->name}}</strong></p>
+                                            <p class="m-0 text-muted">{{$comment->comment}}</p>
+                                        </div>
+                                    </li>
+                                @endforeach
+                                
+                            </ul>
+                        </div>
+
                     </div>
                     <div class="col-4">
                         <aside class="blog-sidebar">
@@ -120,10 +141,10 @@
                                         @foreach ($recent_blogs as $recent_blog)
                                            <li>
                                             <div class="thumb">
-                                                <a href="{{ route('blog.detail',$recent_blog->slug) }}"><img src="{{ asset('blog_image').'/'.$recent_blog->image }}" alt="img"></a>
+                                                <a href="{{ route('blog.detail',$recent_blog->slug) }}" wire:navigate ><img src="{{ asset('blog_image').'/'.$recent_blog->image }}" alt="img"></a>
                                             </div>
                                             <div class="content">
-                                                <h4 class="title"><a href="{{ route('blog.detail',$recent_blog->slug) }}">{{$recent_blog->title}}</a></h4>
+                                                <h4 class="title"><a href="{{ route('blog.detail',$recent_blog->slug) }}" wire:navigate>{{$recent_blog->title}}</a></h4>
                                                 <span><i class="fa-regular fa-calendar"></i>{{ date('F d, Y', strtotime($blog->created_at))}}</span>
                                             </div>
                                         </li> 
@@ -142,7 +163,7 @@
                                 <div class="blog-cat-list">
                                     <ul>
                                         @foreach ($sub_categories as $sub_category)
-                                        <li><a href="#">{{$sub_category->title}} <span>{{ count($sub_category->blog) }}</span></a></li>
+                                        <li><a href="#" wire:navigate>{{$sub_category->title}} <span>{{ count($sub_category->blog) }}</span></a></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -200,13 +221,14 @@
 
 @section('script')
     <script>
-           let user_id = "{{ auth()->check() && auth()->user()->id }}";
-           let vendor_id = "{{ auth()->guard('vendor')->check() && auth()->guard('vendor')->user()->id }}";
-           let admin_id = "{{ auth()->guard('admin')->check() && auth()->guard('admin')->user()->id }}";
+          let user_id = "{{ auth()->check() ? auth()->user()->id : null }}";
+            let vendor_id = "{{ auth()->guard('vendor')->check() ? auth()->guard('vendor')->user()->id : null }}";
+            let admin_id = "{{ auth()->guard('admin')->check() ? auth()->guard('admin')->user()->id : null }}";
+
            let blog_id = "{{ $blog->id }}";
         $(document).on('click','#storeLike',function () {
            let like_id = $(this).data('like_id') ?? null;
-           if(user_id == null || admin_id == null || vendor_id == null)
+           if(user_id == "" && admin_id == "" && vendor_id == "")
            {
                 window.location.href="{{ route('login') }}";
            }
@@ -244,7 +266,12 @@
                     success:function(response){
                         if(response.status == 'success'){
                             $('#commentError').addClass('d-none');
-                            $('#commentSuccess').removeClass('d-none').text('Your comment will appear once the admin has approved it.');
+                            if(response.comment_status == 0){
+                                $('#commentSuccess').removeClass('d-none').text('Your comment will appear once the admin has approved it.');
+                            }
+                            $('#allCommentsUl').prepend(response.html)
+                            $('textarea[name="comment"]').val('');
+                            $('#commentCount').text(response.comment_count);
                         }
                         if(response.status == 'error'){
                             $('#commentSuccess').addClass('d-none');

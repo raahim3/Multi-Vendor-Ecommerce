@@ -83,6 +83,12 @@
                       <span class="validated_txt">{{ $message }}</span>
                     @enderror
                 </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="checkbox" name="is_featured" class="" id="is_featured" value="1">
+                  <label for="is_featured" class="form-control-label">Is Featured</label>
+                </div>
+              </div>
               <hr class="horizontal dark">
               <p class="text-uppercase text-sm">SEO INFO</p>
               <div class="row">

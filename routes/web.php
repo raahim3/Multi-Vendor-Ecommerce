@@ -21,6 +21,7 @@ Route::get('/logout', function () {
 });
 
 Route::get('/',[HomeController::class,'index']);
+Route::get('/blogs',[BlogController::class,'index'])->name('blog.index');
 Route::get('/blog/{slug}',[BlogController::class,'detail'])->name('blog.detail');
 Route::get('/blog/like/store',[BlogController::class,'likeStore'])->name('blog.like.store');
 Route::get('/blog/comment/store',[BlogController::class,'commentStore'])->name('blog.comment.store');

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 use App\Http\Controllers\Admin\Blog\BlogController;
 use App\Http\Controllers\Admin\Blog\BlogSubCategoryController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Setting\GeneralController;
 use App\Http\Controllers\Admin\Setting\SmtpController;
@@ -48,6 +49,9 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::resource('post/blogs', BlogController::class);
         Route::get('get_blog_sub_categories',[BlogController::class,'get_sub_categories'])->name('blog.get_sub_categories');
         Route::get('change_blog_status',[BlogController::class,'change_blog_status'])->name('blog.change_product_status');
+
+        Route::resource('/comments', CommentController::class);
+        Route::get('/change_status/comments',[CommentController::class,'change_status'])->name('comments.change_status');
 
         Route::name('blog.')->group(function(){
             Route::resource('post/blog/category', BlogCategoryController::class);

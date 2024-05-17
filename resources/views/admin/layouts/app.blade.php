@@ -223,6 +223,12 @@
                                     <span class="sidenav-normal"> All Sub Category </span>
                                 </a>
                             </li>
+                            <li class="nav-item {{ Request::is('admin/comments') ? 'active' : '' }} ">
+                                <a class="nav-link " href="{{ route('admin.comments.index') }}" wire:navigate>
+                                    <span class="sidenav-mini-icon"> S </span>
+                                    <span class="sidenav-normal"> All Comments </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

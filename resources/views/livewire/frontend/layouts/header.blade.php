@@ -12,7 +12,7 @@
                     <div class="header-top-right">
                         <ul>
                             <li><a href="{{ route('vendor.register.get') }}" wire:navigate>Become a Vendor</a></li>
-                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="{{ route('blog.index') }}" wire:navigate>Blog</a></li>
                             <li><a href="contact.html">Contact Us</a></li>
                         </ul>
                     </div>
@@ -117,12 +117,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="promotion.html">PROMOTION</a></li>
-                                    <li class="menu-item-has-children"><a href="#">BLOG</a>
-                                        <ul class="submenu">
-                                            <li><a href="blog.html">Our blog</a></li>
-                                            <li><a href="blog-details.html">blog Details</a></li>
-                                        </ul>
-                                    </li>
+                                    <li class="{{ Request::is('blogs') ? 'active' : '' }} {{ Request::is('blog/*') ? 'active' : '' }}"><a  href="{{ route('blog.index') }}" wire:navigate>BLOG</a></li>
                                     <li><a href="index-3.html">SPECIAL</a></li>
                                     <li class="menu-item-has-children"><a href="#">PAGES</a>
                                         <ul class="submenu">

@@ -11,17 +11,30 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+    public function index()
+    {
+        $data['blogs'] = Blog::with('admin','blog_category','blog_sub_category','comments')->where('status',1)->latest()->paginate(10);
+        $data['recent_blogs'] = Blog::latest()->take(4)->get();
+        $subCategories = [];
+        foreach ($data['blogs'] as $key => $blog) {
+            array_push($subCategories , $blog->blog_sub_category_id);
+        }
+        $data['sub_categories'] = BlogSubCategory::with('blog')->whereIn('id',$subCategories)->get();
+        return view('frontend.blogs.index',$data);
+    }
     public function detail($slug)
     {
-        $data['blog'] = Blog::with('admin','blog_category','blog_sub_category','likes')->where('slug',$slug)->first();
+        $data['blog'] = Blog::with('admin','blog_category','blog_sub_category','likes','comments')->where('slug',$slug)->first();
         $data['recent_blogs'] = Blog::latest()->take(4)->get();
         $data['sub_categories'] = BlogSubCategory::with('blog')->where('blog_category_id',$data['blog']->blog_category_id)->get();
         if (auth()->guard('vendor')->user()) {
             $data['isLike'] = auth()->guard('vendor')->user()->likes()->where('blog_id',$data['blog']->id)->first();
         }else if (auth()->guard('admin')->user()) {
             $data['isLike'] = auth()->guard('admin')->user()->likes()->where('blog_id',$data['blog']->id)->first();
-        }else{
+        }else if (auth()->user()){
             $data['isLike'] = auth()->user()->likes()->where('blog_id',$data['blog']->id)->first();
+        }else{
+            $data['isLike'] = "";
         }
         return view('frontend.blogs.detail',$data);
     }
@@ -71,7 +84,18 @@ class BlogController extends Controller
         $comment->comment = $request->comment;
         $comment->status = 0;
         $comment->save();
-        return response()->json(['status'=>'success']);  
+
+        $blog = Blog::with('likes')->find($request->blog_id);
+        $commentCount = $blog->comments()->where('status',1)->get();
+
+        if($comment->status == 1){
+        $html = '<li class="d-flex gap-2  pb-3 mb-3"><div><img src="'.asset('default_avatar.jpg') .'" width="50px" height="50px" class="rounded-circle" alt="">';
+        $html .= '</div><div><p class="m-0"><strong>'.$comment->name.'</strong></p><p class="m-0 text-muted">'.$comment->comment.'</p></div></li>';
+        }
+        else{
+            $html = '';
+        }
+        return response()->json(['status'=>'success','html'=>$html,'comment_status'=>$comment->status,'comment_count'=>count($commentCount)]);  
 
 
     }

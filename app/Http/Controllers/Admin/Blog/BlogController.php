@@ -62,6 +62,11 @@ class BlogController extends Controller
         $ext = rand().".".$img->getClientOriginalName();
         $img->move("blog_image/",$ext);
         $blog->image = $ext;
+        if (isset($request->is_featured)) {
+            $blog->is_featured = $request->is_featured;
+        }else{
+            $blog->is_featured = 0;
+        }
         $blog->save();
 
         return redirect()->route('admin.blogs.index')->with('success','Blog Created Successfully!');
@@ -112,6 +117,11 @@ class BlogController extends Controller
         $blog->meta_title = $request->meta_title;
         $blog->meta_description = $request->meta_description;
         $blog->meta_keywords = $request->meta_keywords;
+        if (isset($request->is_featured)) {
+            $blog->is_featured = $request->is_featured;
+        }else{
+            $blog->is_featured = 0;
+        }
         if($request->image)
         {
             $mainimagePath = public_path("blog_image/{$blog->image}");
