@@ -19,6 +19,7 @@
     <link href="{{ asset('admin_assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('admin_assets/css/argon-dashboard.css') }}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('admin_assets/css/custom.css') }}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css" rel="stylesheet">
@@ -253,6 +254,12 @@
                                 <a class="nav-link  {{ Request::is('admin/settings/smtp') ? 'active' : '' }}" href="{{ route('admin.settings.smtp') }}" wire:navigate>
                                     <span class="sidenav-mini-icon"> S </span>
                                     <span class="sidenav-normal"> SMTP Setup </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link  {{ Request::is('admin/settings/blog_settings') ? 'active' : '' }}" href="{{ route('admin.settings.blog_settings') }}" wire:navigate>
+                                    <span class="sidenav-mini-icon"> B </span>
+                                    <span class="sidenav-normal"> Blog Setting </span>
                                 </a>
                             </li>
                         </ul>

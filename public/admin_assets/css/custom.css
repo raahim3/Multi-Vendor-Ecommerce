@@ -1,0 +1,16 @@
+.comment_approaval_main{
+    width: fit-content;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    overflow: hidden;
+}
+.comment_approaval_main div label{
+    padding: 7px;
+    font-size: 14px;
+    margin: 0;
+    cursor: pointer;
+}
+.comment_approaval_main div label.active{
+    background-color: rgb(221, 216, 216);
+    color: black;
+}

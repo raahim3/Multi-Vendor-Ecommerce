@@ -65,4 +65,16 @@ class GeneralController extends Controller
         $general->update();
         return redirect()->back()->with('success', 'Favicon has been deleted successfully');
     }
+    public function blog_settings()
+    {
+        return view('admin.settings.blog_setting.index');
+    }
+
+    public function blog_settings_post(Request $request)
+    {
+        $general = General::first();
+        $general->comment_approaval = $request->comment_approaval;
+        $general->update();
+        return redirect()->back()->with('success', 'Blog Settings has been Updated successfully');
+    }
 }

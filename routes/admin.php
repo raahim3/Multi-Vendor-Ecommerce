@@ -72,6 +72,11 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/smtp',[SmtpController::class, 'index'])->name('admin.settings.smtp');
         Route::post('/smtp/update',[SmtpController::class, 'update'])->name('admin.settings.smtp.update');
 
+        // Blog Setting
+        Route::get('/blog_settings',[GeneralController::class, 'blog_settings'])->name('admin.settings.blog_settings');
+        Route::post('/blog_settings',[GeneralController::class, 'blog_settings_post'])->name('admin.settings.blog_settings.post');
+
+
     });
 });
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Setting\General;
 use App\Models\Blog;
 use App\Models\BlogComment;
 use App\Models\BlogLike;
@@ -67,6 +68,8 @@ class BlogController extends Controller
     }
     public function commentStore(Request $request){
 
+        $settings = General::first();
+
         if($request->name == null || $request->name == "" && $request->email == null || $request->email == "" && $request->comment == null || $request->comment == ""){
             return response()->json(['status'=>'error','message'=>'All Fields is required']);  
         }
@@ -82,7 +85,11 @@ class BlogController extends Controller
         $comment->name = $request->name;
         $comment->email = $request->email;
         $comment->comment = $request->comment;
-        $comment->status = 0;
+        if($settings->comment_approaval == 1){
+            $comment->status = 0;
+        }else{
+            $comment->status = 1;
+        }
         $comment->save();
 
         $blog = Blog::with('likes')->find($request->blog_id);
