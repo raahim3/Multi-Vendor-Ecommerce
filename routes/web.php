@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::get('/blogs',[BlogController::class,'index'])->name('blog.index');
 Route::get('/blog/{slug}',[BlogController::class,'detail'])->name('blog.detail');
 Route::get('/blog/like/store',[BlogController::class,'likeStore'])->name('blog.like.store');
 Route::get('/blog/comment/store',[BlogController::class,'commentStore'])->name('blog.comment.store');
+Route::get('/product/{slug}',[ProductController::class,'detail'])->name('product.detail');
 
 Auth::routes(['verify' => true]);
 

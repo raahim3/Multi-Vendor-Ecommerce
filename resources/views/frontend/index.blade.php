@@ -103,72 +103,20 @@
                                 </div>
                             </div>
                             <div class="row custom justify-content-center">
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product01.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">Watch $29.08<span>-35%</span></a></h4>
-                                            <p>0 orders</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product02.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">Backup $29.08<span>-25%</span></a></h4>
-                                            <p>05 orders</p>
+                                
+                                @foreach ($supar_deals as $supar_deal)
+                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                                        <div class="product-item mb-30">
+                                            <div class="product-thumb">
+                                                <a href="{{route('product.detail',$supar_deal->slug)}}" wire:navigate><img src="{{ asset('product_image').'/'.$supar_deal->image }}" alt=""></a>
+                                            </div>
+                                            <div class="product-content">
+                                                <h4 class="title"><a href="{{route('product.detail',$supar_deal->slug)}}" wire:navigate>{{ $supar_deal->sub_category->title }} RS{{ $supar_deal->price }}<span>-35%</span></a></h4>
+                                                <p>0 orders</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product03.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">Fashion $15.08<span>-35%</span></a></h4>
-                                            <p>13 orders</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product04.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">Watch $29.08<span>-35%</span></a></h4>
-                                            <p>50 orders</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product05.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">Accessories<span>-15%</span></a></h4>
-                                            <p>02 orders</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product06.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">Jewellery $29.08<span>-20%</span></a></h4>
-                                            <p>20 orders</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -189,39 +137,19 @@
                                 </div>
                             </div>
                             <div class="row custom justify-content-center">
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product07.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">launch $29.08<span>-30%</span></a></h4>
-                                            <p>40 orders</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product08.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">Watch $29.08<span>-40%</span></a></h4>
-                                            <p>20 orders</p>
+                                @foreach ($top_selections as $top_selection)
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="product-item mb-30">
+                                            <div class="product-thumb">
+                                                <a href="shop-details.html"><img src="{{ asset('product_image').'/'.$top_selection->image }}" alt=""></a>
+                                            </div>
+                                            <div class="product-content">
+                                                <h4 class="title"><a href="shop-details.html">{{ $top_selection->sub_category->title }} RS{{ $top_selection->price }}<span>-35%</span></a></h4>
+                                                <p>0 orders</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product09.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">phone $29.08<span>-10%</span></a></h4>
-                                            <p>30 orders</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -240,39 +168,19 @@
                                 </div>
                             </div>
                             <div class="row custom justify-content-center">
+                                @foreach ($new_arrivals as $new_arrival)
                                 <div class="col-md-4 col-sm-6">
                                     <div class="product-item mb-30">
                                         <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product10.jpg') }}" alt=""></a>
+                                            <a href="shop-details.html"><img src="{{ asset('product_image').'/'.$new_arrival->image }}" alt=""></a>
                                         </div>
                                         <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">launch $29.08<span>-30%</span></a></h4>
-                                            <p>40 orders</p>
+                                            <h4 class="title"><a href="shop-details.html">{{ $new_arrival->sub_category->title }} RS{{ $new_arrival->price }}<span>-35%</span></a></h4>
+                                            <p>0 orders</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product11.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">Watch $29.08<span>-40%</span></a></h4>
-                                            <p>20 orders</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="product-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/super_product12.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">phone $29.08<span>-10%</span></a></h4>
-                                            <p>30 orders</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            @endforeach
                             </div>
                         </div>
                     </div>
@@ -425,66 +333,23 @@
                         <div class="trending-product">
                             <h3 class="title">Trending Products</h3>
                             <ul>
-                                <li class="trending-product-item mb-30">
-                                    <div class="thumb">
-                                        <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/trending_product01.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="content">
-                                        <h6 class="title"><a href="shop-details.html">Morales Ultimate Launch</a></h6>
-                                        <h4 class="price">$09.08 <del>$29.08</del></h4>
-                                        <div class="content-bottom">
-                                            <ul>
-                                                <li>1k+ Orders ~</li>
-                                                <li><i class="fa-solid fa-star"></i>4.7</li>
-                                            </ul>
+                                @foreach ($trending_products as $trending_product)
+                                    <li class="trending-product-item mb-30">
+                                        <div class="thumb">
+                                            <a href="shop-details.html"><img src="{{ asset('product_image').'/'.$trending_product->image }}" alt=""></a>
                                         </div>
-                                    </div>
-                                </li>
-                                <li class="trending-product-item mb-30">
-                                    <div class="thumb">
-                                        <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/trending_product02.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="content">
-                                        <h6 class="title"><a href="shop-details.html">Lixada Fishing Breathable</a></h6>
-                                        <h4 class="price">$14.08 <span>-35%</span></h4>
-                                        <div class="content-bottom">
-                                            <ul>
-                                                <li>1.5k+ Orders ~</li>
-                                                <li><i class="fa-solid fa-star"></i>4.8</li>
-                                            </ul>
+                                        <div class="content">
+                                            <h6 class="title"><a href="shop-details.html">{{$trending_product->title}}</a></h6>
+                                            <h4 class="price">${{$trending_product->price}} <del>$29.08</del></h4>
+                                            <div class="content-bottom">
+                                                <ul>
+                                                    <li>1k+ Orders ~</li>
+                                                    <li><i class="fa-solid fa-star"></i>4.7</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li class="trending-product-item mb-30">
-                                    <div class="thumb">
-                                        <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/trending_product03.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="content">
-                                        <h6 class="title"><a href="shop-details.html">Morales Ultimate Launch</a></h6>
-                                        <h4 class="price">$18.08 <span>-25%</span></h4>
-                                        <div class="content-bottom">
-                                            <ul>
-                                                <li>2k+ Orders ~</li>
-                                                <li><i class="fa-solid fa-star"></i>4.5</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="trending-product-item mb-30">
-                                    <div class="thumb">
-                                        <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/trending_product04.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="content">
-                                        <h6 class="title"><a href="shop-details.html">Winter Gloves Mens</a></h6>
-                                        <h4 class="price">$19.08 <span>-20%</span></h4>
-                                        <div class="content-bottom">
-                                            <ul>
-                                                <li>3k+ Orders ~</li>
-                                                <li><i class="fa-solid fa-star"></i>4.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -498,152 +363,36 @@
                                     <h4 class="title">Flash Sale Today!</h4>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6">
+                            {{-- <div class="col-lg-6 col-md-6">
                                 <div class="product-menu-nav">
                                     <button class="active" data-filter="*">Flash</button>
                                     <button class="" data-filter=".cat-one">Popular</button>
                                     <button class="" data-filter=".cat-two">Top Rate</button>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="flash-product-item-wrap">
                             <div class="row flash-isotope-active">
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-two">
-                                    <div class="product-item-two mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/flash_product01.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h6 class="title"><a href="shop-details.html">Morales Ultimate Launch</a></h6>
-                                            <h4 class="price">$29.08 <span>-35%</span></h4>
-                                            <div class="content-bottom">
-                                                <ul>
-                                                    <li>1k+ Orders ~</li>
-                                                    <li><i class="fa-solid fa-star"></i>4.9</li>
-                                                </ul>
+                                
+                                @foreach ($flash_sales as $flash_sale)
+                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-two">
+                                        <div class="product-item-two mb-30">
+                                            <div class="product-thumb">
+                                                <a href="shop-details.html"><img src="{{ asset('product_image').'/'.$flash_sale->image }}" alt=""></a>
+                                            </div>
+                                            <div class="product-content">
+                                                <h6 class="title"><a href="shop-details.html">{{$flash_sale->title}}</a></h6>
+                                                <h4 class="price">Rs{{$flash_sale->price}} <span>-35%</span></h4>
+                                                <div class="content-bottom">
+                                                    <ul>
+                                                        <li>1k+ Orders ~</li>
+                                                        <li><i class="fa-solid fa-star"></i>4.9</li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-two cat-one">
-                                    <div class="product-item-two mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/flash_product02.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h6 class="title"><a href="shop-details.html">Lixada Fishing Breathable</a></h6>
-                                            <h4 class="price">$25.08 <span>-34%</span></h4>
-                                            <div class="content-bottom">
-                                                <ul>
-                                                    <li>1.5k+ Orders ~</li>
-                                                    <li><i class="fa-solid fa-star"></i>4.2</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-one">
-                                    <div class="product-item-two mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/flash_product03.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h6 class="title"><a href="shop-details.html">Winter Gloves Mens</a></h6>
-                                            <h4 class="price">$29.08 <span>-20%</span></h4>
-                                            <div class="content-bottom">
-                                                <ul>
-                                                    <li>2k+ Orders ~</li>
-                                                    <li><i class="fa-solid fa-star"></i>4.8</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-one cat-two">
-                                    <div class="product-item-two mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/flash_product04.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h6 class="title"><a href="shop-details.html">Fashion High scalding</a></h6>
-                                            <h4 class="price">$28.08 <span>-40%</span></h4>
-                                            <div class="content-bottom">
-                                                <ul>
-                                                    <li>2.5k+ Orders ~</li>
-                                                    <li><i class="fa-solid fa-star"></i>4.7</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-two cat-one">
-                                    <div class="product-item-two mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/flash_product05.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h6 class="title"><a href="shop-details.html">Morales Ultimate Launch</a></h6>
-                                            <h4 class="price">$29.08 <span>-35%</span></h4>
-                                            <div class="content-bottom">
-                                                <ul>
-                                                    <li>1.5k+ Orders ~</li>
-                                                    <li><i class="fa-solid fa-star"></i>4.4</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-two">
-                                    <div class="product-item-two mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/flash_product06.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h6 class="title"><a href="shop-details.html">Lixada Fishing Breathable</a></h6>
-                                            <h4 class="price">$27.08 <span>-50%</span></h4>
-                                            <div class="content-bottom">
-                                                <ul>
-                                                    <li>1.5k+ Orders ~</li>
-                                                    <li><i class="fa-solid fa-star"></i>4.3</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-one">
-                                    <div class="product-item-two mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/flash_product07.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h6 class="title"><a href="shop-details.html">Elastic Summer Newborn</a></h6>
-                                            <h4 class="price">$9.08 <span>-30%</span></h4>
-                                            <div class="content-bottom">
-                                                <ul>
-                                                    <li>5.5k+ Orders ~</li>
-                                                    <li><i class="fa-solid fa-star"></i>4.5</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-two">
-                                    <div class="product-item-two mb-30">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend_assets/img/product/flash_product08.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h6 class="title"><a href="shop-details.html">Fashion High scalding</a></h6>
-                                            <h4 class="price">$29.08 <span>-30%</span></h4>
-                                            <div class="content-bottom">
-                                                <ul>
-                                                    <li>3.3k+ Orders ~</li>
-                                                    <li><i class="fa-solid fa-star"></i>4.5</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
