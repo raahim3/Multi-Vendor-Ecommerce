@@ -37,7 +37,7 @@
                             @foreach ($product->images as $key => $image)
                             <div class="tab-pane" id="nav-item-{{$key}}" role="tabpanel">
                                 <div class="shop-details-img">
-                                    <img src="{{ asset('product_image/').'/'.$image->image }}" alt="img">
+                                    <img src="{{ asset('product_image/').'/'.$image->image }}" alt="img" width="100%">
                                 </div>
                             </div>
                             @endforeach
@@ -115,9 +115,8 @@
                             <ul>
                                 <li class="sd-category">
                                     <span class="title">Categories :</span>
-                                    <a href="shop.html">Hand Watch,</a>
-                                    <a href="shop.html">Smartwatch,</a>
-                                    <a href="shop.html">Phone</a>
+                                    <a href="shop.html">{{$product->category->title}},</a>
+                                    <a href="shop.html">{{$product->sub_category->title}}</a>
                                 </li>
                                 <li class="sd-sku">
                                     <span class="title">SKU :</span>

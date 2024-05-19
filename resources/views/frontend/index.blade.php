@@ -108,7 +108,7 @@
                                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-item mb-30">
                                             <div class="product-thumb">
-                                                <a href="{{route('product.detail',$supar_deal->slug)}}" wire:navigate><img src="{{ asset('product_image').'/'.$supar_deal->image }}" alt=""></a>
+                                                <a href="{{route('product.detail',$supar_deal->slug)}}" wire:navigate><img src="{{ asset('product_image').'/'.$supar_deal->image }}" alt="{{ $supar_deal->title }}" width="100%" height="200px"></a>
                                             </div>
                                             <div class="product-content">
                                                 <h4 class="title"><a href="{{route('product.detail',$supar_deal->slug)}}" wire:navigate>{{ $supar_deal->sub_category->title }} RS{{ $supar_deal->price }}<span>-35%</span></a></h4>
@@ -141,10 +141,10 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="product-item mb-30">
                                             <div class="product-thumb">
-                                                <a href="shop-details.html"><img src="{{ asset('product_image').'/'.$top_selection->image }}" alt=""></a>
+                                                <a href="{{ route('product.detail',$top_selection->slug) }}" wire:navigate><img src="{{ asset('product_image').'/'.$top_selection->image }}" alt="{{ $top_selection->title }}" width="100%" height="180px"></a>
                                             </div>
                                             <div class="product-content">
-                                                <h4 class="title"><a href="shop-details.html">{{ $top_selection->sub_category->title }} RS{{ $top_selection->price }}<span>-35%</span></a></h4>
+                                                <h4 class="title"><a href="{{ route('product.detail',$top_selection->slug) }}" wire:navigate>{{ $top_selection->sub_category->title }} RS{{ $top_selection->price }}<span>-35%</span></a></h4>
                                                 <p>0 orders</p>
                                             </div>
                                         </div>
@@ -172,10 +172,10 @@
                                 <div class="col-md-4 col-sm-6">
                                     <div class="product-item mb-30">
                                         <div class="product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('product_image').'/'.$new_arrival->image }}" alt=""></a>
+                                            <a href="{{ route('product.detail',$new_arrival->slug) }}" wire:navigate><img src="{{ asset('product_image').'/'.$new_arrival->image }}" alt="{{ $new_arrival->title }}" width="100%" height="180px"></a>
                                         </div>
                                         <div class="product-content">
-                                            <h4 class="title"><a href="shop-details.html">{{ $new_arrival->sub_category->title }} RS{{ $new_arrival->price }}<span>-35%</span></a></h4>
+                                            <h4 class="title"><a href="{{ route('product.detail',$new_arrival->slug) }}" wire:navigate>{{ $new_arrival->sub_category->title }} RS{{ $new_arrival->price }}<span>-35%</span></a></h4>
                                             <p>0 orders</p>
                                         </div>
                                     </div>
@@ -336,10 +336,10 @@
                                 @foreach ($trending_products as $trending_product)
                                     <li class="trending-product-item mb-30">
                                         <div class="thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('product_image').'/'.$trending_product->image }}" alt=""></a>
+                                            <a href="{{ route('product.detail',$trending_product->slug) }}" wire:navigate><img src="{{ asset('product_image').'/'.$trending_product->image }}" alt="{{ $trending_product->title }}" width="100%"></a>
                                         </div>
                                         <div class="content">
-                                            <h6 class="title"><a href="shop-details.html">{{$trending_product->title}}</a></h6>
+                                            <h6 class="title"><a href="{{ route('product.detail',$trending_product->slug) }}" wire:navigate>{{$trending_product->title}}</a></h6>
                                             <h4 class="price">${{$trending_product->price}} <del>$29.08</del></h4>
                                             <div class="content-bottom">
                                                 <ul>
@@ -378,10 +378,10 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 grid-item grid-sizer cat-two">
                                         <div class="product-item-two mb-30">
                                             <div class="product-thumb">
-                                                <a href="shop-details.html"><img src="{{ asset('product_image').'/'.$flash_sale->image }}" alt=""></a>
+                                                <a  href="{{ route('product.detail',$flash_sale->slug) }}" wire:navigate><img src="{{ asset('product_image').'/'.$flash_sale->image }}" alt="{{ $flash_sale->title }}" width="100%" height="200px"></a>
                                             </div>
                                             <div class="product-content">
-                                                <h6 class="title"><a href="shop-details.html">{{$flash_sale->title}}</a></h6>
+                                                <h6 class="title"><a href="{{ route('product.detail',$flash_sale->slug) }}" wire:navigate>{{$flash_sale->title}}</a></h6>
                                                 <h4 class="price">Rs{{$flash_sale->price}} <span>-35%</span></h4>
                                                 <div class="content-bottom">
                                                     <ul>

@@ -1,7 +1,7 @@
 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-9">
     <div class="blog-item mb-30">
         <div class="blog-thumb">
-            <a href="{{ route('blog.detail',$blog->slug) }}" wire:navigate><img src="{{ asset('blog_image').'/'.$blog->image }}" alt=""></a>
+            <a href="{{ route('blog.detail',$blog->slug) }}" wire:navigate><img src="{{ asset('blog_image').'/'.$blog->image }}" alt="{{ $blog->title }}" width="100%" height="220px"></a>
         </div>
         <div class="blog-content">
             <div class="comment">

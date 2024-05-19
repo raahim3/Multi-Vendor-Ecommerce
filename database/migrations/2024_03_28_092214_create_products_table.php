@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('description');
             $table->bigInteger('price');
             $table->integer('quantity');
+            $table->integer('discount')->nullable();
+            $table->integer('actual_price')->nullable();
             $table->string('status');
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
