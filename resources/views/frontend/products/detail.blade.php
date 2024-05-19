@@ -91,10 +91,9 @@
                         <div class="shop-details-color">
                             <span>Color :</span>
                             <ul>
-                                <li class="active"></li>
-                                <li class="black"></li>
-                                <li class="green"></li>
-                                <li class="blue"></li>
+                                @foreach ($product->colors as $color)
+                                    <li style="background-color: {{$color->color}} !important"></li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="shop-details-quantity">
@@ -834,107 +833,7 @@
                         <div class="tab-content" id="productTabContent">
                             <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                                 <div class="product-desc-content">
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                        suffered alteration in some form,by injected humour, or rando wmised words which don't look
-                                        even the slightly believable. If you are going to use a passage of Lorem Ipsum, you need to
-                                        be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum
-                                        genereators on the Internet tend to repeat predefined chunks as necessary, making this the
-                                        first true generator on the Internet. It uses a dictionary of over 200 Latdin words,
-                                        combined with a handful of model sentence structures, to generate Lorem Ipsum which looks
-                                        reasonable suffered alteration in some form.</p>
-                                    <div class="product-quick-details mb-25">
-                                        <h4 class="title">Quick Details</h4>
-                                        <div class="product-details-list-wrap">
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                                    <div class="product-details-list">
-                                                        <ul>
-                                                            <li>Private Mold:</li>
-                                                            <li>Model Number:</li>
-                                                            <li>Display Type:</li>
-                                                            <li>Screen:</li>
-                                                            <li>Feature:</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2 col-md-6 col-sm-6">
-                                                    <div class="product-details-list">
-                                                        <ul>
-                                                            <li>Yes</li>
-                                                            <li>uxt</li>
-                                                            <li>Max</li>
-                                                            <li>5"</li>
-                                                            <li>MP3 Playback</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                                    <div class="product-details-list">
-                                                        <ul>
-                                                            <li>Brand Name:</li>
-                                                            <li>Place of Origin:</li>
-                                                            <li>Screen Resolution:</li>
-                                                            <li>Display Color:</li>
-                                                            <li>Operation System:</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                                    <div class="product-details-list">
-                                                        <ul>
-                                                            <li>SOVOGUE</li>
-                                                            <li>Guangdong, China</li>
-                                                            <li>240*320</li>
-                                                            <li>Color</li>
-                                                            <li>ANDROID, IOS</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p>Need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem
-                                        Ipsum genereators on the Internet tend to repeat predefined chunks as necessary, making this
-                                        the first true generator on the Internet. It uses a dictionary of over 200 Latdin words,
-                                        combined with a handful of model sentence structures, to generate Lorem Ipsum which looks
-                                        reasonable tend suffered alteration in some form reators on the Internet tend to repeat .
-                                    </p>
-                                    <div class="product-feature-wrap mb-30">
-                                        <div class="row">
-                                            <div class="col-xl-7 col-lg-6">
-                                                <div class="product-details-img">
-                                                    <img src="assets/img/images/product_details_img.jpg" alt="img">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-5 col-lg-6">
-                                                <div class="product-feature">
-                                                    <h4 class="title">Features :</h4>
-                                                    <p>Need to be sure there isn't anything embarrassing hidden in the middle of
-                                                        text. All the Lorem Ipsum
-                                                        genereators on the Internet tend to repeat predefined chunks assing hidden
-                                                    </p>
-                                                    <ul class="product-feature-list">
-                                                        <li>Windows Mobile® 6.1 Professional Edition</li>
-                                                        <li>The device features a LED display.</li>
-                                                        <li>Pros:really great keyboard, good trackpad, alcantara</li>
-                                                        <li>802.11b/g with WPA, WPA2, and 801.1x authentication</li>
-                                                        <li>320x320 transflective colour TFT touchscreen</li>
-                                                        <li>HSDPA/UMTS/EDGE/GPRS/GSM radio</li>
-                                                        <li>Tri-band UMTS — 850MHz, 1900MHz, 2100MHz</li>
-                                                        <li>2.0 megapixel camera, up to 8x digital zoom and video capture</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                        suffered alteration in some form, by injected humour, or rando wmised words which don't look
-                                        even the slightly believable. If you are going to use a passage of Lorem Ipsum, you need to
-                                        be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum
-                                        genereators on the Internet tend to repeat predefined chunks as necessary, making this the
-                                        first true generator on the Internet. It uses a dictionary of over 200 Latdin words,
-                                        combined with a handful of model sentence structures, to generate Lorem Ipsum which looks
-                                        reasonable suffered alteration in some form.</p>
+                                    {!! $product->content !!}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
@@ -946,44 +845,18 @@
                                                 <div class="col-lg-3 col-md-6 col-sm-6">
                                                     <div class="product-details-list">
                                                         <ul>
-                                                            <li>Private Mold:</li>
-                                                            <li>Model Number:</li>
-                                                            <li>Display Type:</li>
-                                                            <li>Screen:</li>
-                                                            <li>Feature:</li>
+                                                            @foreach ($product->addtional_infos as $addtional_info)
+                                                                <li>{{$addtional_info->key}}:</li>
+                                                            @endforeach
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-2 col-md-6 col-sm-6">
                                                     <div class="product-details-list">
                                                         <ul>
-                                                            <li>Yes</li>
-                                                            <li>uxt</li>
-                                                            <li>Max</li>
-                                                            <li>5"</li>
-                                                            <li>MP3 Playback</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                                    <div class="product-details-list">
-                                                        <ul>
-                                                            <li>Brand Name:</li>
-                                                            <li>Place of Origin:</li>
-                                                            <li>Screen Resolution:</li>
-                                                            <li>Display Color:</li>
-                                                            <li>Operation System:</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                                    <div class="product-details-list">
-                                                        <ul>
-                                                            <li>SOVOGUE</li>
-                                                            <li>Guangdong, China</li>
-                                                            <li>240*320</li>
-                                                            <li>Color</li>
-                                                            <li>ANDROID, IOS</li>
+                                                            @foreach ($product->addtional_infos as $addtional_info)
+                                                                <li>{{$addtional_info->value}}</li>
+                                                            @endforeach
                                                         </ul>
                                                     </div>
                                                 </div>
