@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 19, 2024 at 01:32 PM
+-- Generation Time: May 20, 2024 at 07:40 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -207,6 +207,30 @@ INSERT INTO `blog_sub_categories` (`id`, `title`, `slug`, `blog_category_id`, `c
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` bigint UNSIGNED NOT NULL,
+  `quantity` int NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sub_total` bigint NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `quantity`, `color`, `sub_total`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 4, 'Black', 119700, 4, 1, '2024-05-21 01:21:43', '2024-05-21 01:21:43');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `categories`
 --
 
@@ -309,7 +333,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2024_05_16_183612_create_blog_comments_table', 6),
 (20, '2024_05_19_112433_create_product_colors_table', 7),
 (21, '2024_05_19_113057_create_product_sizes_table', 7),
-(22, '2024_05_19_113414_create_product_additional_infos_table', 7);
+(22, '2024_05_19_113414_create_product_additional_infos_table', 7),
+(23, '2024_05_20_171531_create_carts_table', 8);
 
 -- --------------------------------------------------------
 
@@ -412,9 +437,9 @@ CREATE TABLE `product_additional_infos` (
 --
 
 INSERT INTO `product_additional_infos` (`id`, `key`, `value`, `product_id`, `created_at`, `updated_at`) VALUES
-(19, 'Brand Name', 'Nike', 6, '2024-05-19 20:18:07', '2024-05-19 20:18:07'),
-(20, 'style', 'New', 6, '2024-05-19 20:18:07', '2024-05-19 20:18:07'),
-(21, 'Brand Name', 'Nike', 5, '2024-05-19 20:18:25', '2024-05-19 20:18:25');
+(21, 'Brand Name', 'Nike', 5, '2024-05-19 20:18:25', '2024-05-19 20:18:25'),
+(22, 'Brand Name', 'Nike', 6, '2024-05-19 20:47:23', '2024-05-19 20:47:23'),
+(23, 'style', 'New', 6, '2024-05-19 20:47:23', '2024-05-19 20:47:23');
 
 -- --------------------------------------------------------
 
@@ -437,12 +462,14 @@ CREATE TABLE `product_colors` (
 --
 
 INSERT INTO `product_colors` (`id`, `name`, `color`, `status`, `product_id`, `created_at`, `updated_at`) VALUES
-(26, 'Red', '#ff0000', 1, 6, '2024-05-19 20:18:07', '2024-05-19 20:18:07'),
-(27, 'Blue', '#0400ff', 1, 6, '2024-05-19 20:18:07', '2024-05-19 20:18:07'),
-(28, 'Yellow', '#e2ff05', 1, 6, '2024-05-19 20:18:07', '2024-05-19 20:18:07'),
 (29, 'black', '#000000', 1, 5, '2024-05-19 20:18:25', '2024-05-19 20:18:25'),
-(30, 'black', '#000000', 1, 4, '2024-05-19 20:18:41', '2024-05-19 20:18:41'),
-(31, 'black', '#000000', 1, 3, '2024-05-19 20:20:56', '2024-05-19 20:20:56');
+(31, 'black', '#000000', 1, 3, '2024-05-19 20:20:56', '2024-05-19 20:20:56'),
+(32, 'Red', '#c78e8e', 1, 6, '2024-05-19 20:47:22', '2024-05-19 20:47:22'),
+(33, 'Blue', '#0400ff', 1, 6, '2024-05-19 20:47:22', '2024-05-19 20:47:22'),
+(34, 'Yellow', '#e2ff05', 1, 6, '2024-05-19 20:47:22', '2024-05-19 20:47:22'),
+(35, 'Black', '#000000', 1, 4, '2024-05-20 23:39:59', '2024-05-20 23:39:59'),
+(36, 'Red', '#ff0000', 1, 4, '2024-05-20 23:39:59', '2024-05-20 23:39:59'),
+(37, 'Green', '#11ff00', 1, 4, '2024-05-20 23:39:59', '2024-05-20 23:39:59');
 
 -- --------------------------------------------------------
 
@@ -478,13 +505,13 @@ CREATE TABLE `product_sizes` (
 --
 
 INSERT INTO `product_sizes` (`id`, `size`, `status`, `product_id`, `created_at`, `updated_at`) VALUES
-(36, 'SM', 1, 6, '2024-05-19 20:18:07', '2024-05-19 20:18:07'),
-(37, 'Md', 1, 6, '2024-05-19 20:18:07', '2024-05-19 20:18:07'),
-(38, 'LG', 1, 6, '2024-05-19 20:18:07', '2024-05-19 20:18:07'),
-(39, 'XL', 1, 6, '2024-05-19 20:18:07', '2024-05-19 20:18:07'),
 (40, 'sm', 1, 5, '2024-05-19 20:18:25', '2024-05-19 20:18:25'),
-(41, 'sm', 1, 4, '2024-05-19 20:18:41', '2024-05-19 20:18:41'),
-(42, 'md', 1, 3, '2024-05-19 20:20:56', '2024-05-19 20:20:56');
+(42, 'md', 1, 3, '2024-05-19 20:20:56', '2024-05-19 20:20:56'),
+(43, 'SM', 1, 6, '2024-05-19 20:47:23', '2024-05-19 20:47:23'),
+(44, 'Md', 1, 6, '2024-05-19 20:47:23', '2024-05-19 20:47:23'),
+(45, 'LG', 1, 6, '2024-05-19 20:47:23', '2024-05-19 20:47:23'),
+(46, 'XL', 1, 6, '2024-05-19 20:47:23', '2024-05-19 20:47:23'),
+(47, 'sm', 1, 4, '2024-05-20 23:39:59', '2024-05-20 23:39:59');
 
 -- --------------------------------------------------------
 
@@ -551,6 +578,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Muhammad Rahim', 'raahim32006@gmail.com', NULL, '$2y$12$b1vZQtiNCv29lC.wo9xcW.rao0odvYkK.ITk2EC0e6EP9kMUIaNty', 0, NULL, '2024-05-21 00:27:48', '2024-05-21 00:27:48');
 
 -- --------------------------------------------------------
 
@@ -632,6 +666,14 @@ ALTER TABLE `blog_likes`
 ALTER TABLE `blog_sub_categories`
   ADD PRIMARY KEY (`id`),
   ADD KEY `blog_sub_categories_blog_category_id_foreign` (`blog_category_id`);
+
+--
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `carts_product_id_foreign` (`product_id`),
+  ADD KEY `carts_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `categories`
@@ -782,6 +824,12 @@ ALTER TABLE `blog_sub_categories`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -803,7 +851,7 @@ ALTER TABLE `generals`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -821,13 +869,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_additional_infos`
 --
 ALTER TABLE `product_additional_infos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `product_colors`
 --
 ALTER TABLE `product_colors`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `product_images`
@@ -839,7 +887,7 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT for table `product_sizes`
 --
 ALTER TABLE `product_sizes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `smtp_setups`
@@ -857,7 +905,7 @@ ALTER TABLE `sub_categories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vendors`
@@ -900,6 +948,13 @@ ALTER TABLE `blog_likes`
 --
 ALTER TABLE `blog_sub_categories`
   ADD CONSTRAINT `blog_sub_categories_blog_category_id_foreign` FOREIGN KEY (`blog_category_id`) REFERENCES `blog_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `carts`
+--
+ALTER TABLE `carts`
+  ADD CONSTRAINT `carts_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `carts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `products`
