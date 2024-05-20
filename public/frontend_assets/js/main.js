@@ -576,7 +576,7 @@ $('.flash-isotope-active').imagesLoaded(function () {
 
 });
 //for menu active class
-	$('.product-menu-nav button,.shop-details-color li,.color-wrap li').on('click', function (event) {
+	$('.product-menu-nav button,.shop-details-color label,.color-wrap li').on('click', function (event) {
 	$(this).siblings('.active').removeClass('active');
 	$(this).addClass('active');
 	event.preventDefault();
@@ -597,5 +597,19 @@ function wowAnimation() {
 	wow.init();
 }
 
+
+$(document).on('click','#cartBtn',function(){
+	$.ajax({
+		url:"get/cart/data",
+		type:"GET",
+		success:function(response){
+			if (response.status == 'success') {
+				response.data.forEach(element => {
+					
+				});
+			}
+		}
+	});
+});
 
 })(jQuery);

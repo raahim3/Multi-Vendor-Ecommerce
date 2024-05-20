@@ -3869,32 +3869,35 @@ label {
 .shop-details-color ul {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
-.shop-details-color ul li {
+/* .shop-details-color ul li{
+    position: relative;
+    margin-right: 10px;
+    margin-top: 10px;
+} */
+.shop-details-color ul label {
     height: 37px;
     width: 37px;
     border-radius: 5px;
     background: #ff4800;
-    margin-right: 10px;
-    margin-top: 10px;
     position: relative;
     cursor: pointer;
     z-index: 1;
 }
-.shop-details-color ul li::before {
+/* .shop-details-color ul li::before {
     content: "";
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
+    z-index: 2;
+    opacity: 0; */
+/* } */
+.shop-details-color ul label.active {
     border: 2px solid #000000;
     border-radius: 5px;
-    z-index: -1;
-    opacity: 0;
-}
-.shop-details-color ul li.active::before {
-    opacity: 1;
 }
 .shop-details-color ul li.black {
     background: #282828;

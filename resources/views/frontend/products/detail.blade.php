@@ -91,17 +91,18 @@
                         <div class="shop-details-color">
                             <span>Color :</span>
                             <ul>
-                                @foreach ($product->colors as $color)
-                                    <li style="background-color: {{$color->color}} !important"></li>
+                                @foreach ($product->colors as $key => $color)
+                                    <input type="radio" name="color" {{ $key == 0 ? 'checked' : '' }} hidden id="color__{{$key}}" value="{{$color->name}}">
+                                    <label for="color__{{$key}}" class="{{ $key == 0 ? 'active' : '' }}" style="background-color: {{$color->color}} !important;"></label>
                                 @endforeach
                             </ul>
                         </div>
                         <div class="shop-details-quantity">
                             <span>Quantity :</span>
                             <div class="cart-plus-minus">
-                                <input type="text" value="1">
+                                <input type="text" value="1" id="quantity">
                             </div>
-                            <a href="shop-details.html" class="wishlist-btn"><i class="fa-solid fa-cart-arrow-down"></i> Add to Cart</a>
+                            <a href="javascript:void(0)" class="wishlist-btn" data-product-id="{{ $product->id }}" id="addToCartBtn"><i class="fa-solid fa-cart-arrow-down"></i> Add to Cart</a>
                             <a href="shop-details.html" class="cart-btn">Buy now</a>
                         </div>
                         <div class="shop-details-Wishlist">
@@ -1017,4 +1018,30 @@
 <!-- main-area-end -->
 
 
+@endsection
+@section('script')
+    <script>
+        $(document).on('click','#addToCartBtn',function(){
+            let product_id = $(this).data('product-id');
+            let quantity = $('#quantity').val();
+            let color = $('input[name=color]').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url:"{{ route('cart.store') }}",
+                type:"POST",
+                data:{product_id,quantity,color},
+                success:function(response){
+                    if(response.status == 'success'){
+                        $('#cartCount').text(response.count);
+                    }
+                },
+            });
+        });
+    </script>
 @endsection

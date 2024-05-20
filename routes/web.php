@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Auth;
@@ -27,9 +28,10 @@ Route::get('/blog/{slug}',[BlogController::class,'detail'])->name('blog.detail')
 Route::get('/blog/like/store',[BlogController::class,'likeStore'])->name('blog.like.store');
 Route::get('/blog/comment/store',[BlogController::class,'commentStore'])->name('blog.comment.store');
 Route::get('/product/{slug}',[ProductController::class,'detail'])->name('product.detail');
+Route::get('/get/cart/data',[CartController::class,'get_data'])->name('cart.data');
 
 Auth::routes(['verify' => true]);
 
-Route::middleware('verified')->group(function () {
-
+Route::middleware('auth')->group(function () {
+    Route::post('cart',[CartController::class,'cart_store'])->name('cart.store');
 });
