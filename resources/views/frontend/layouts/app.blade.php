@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="{{ asset('frontend_assets/css/default.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend_assets/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend_assets/css/responsive.css') }}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         @livewireStyles
         <style>
             .cartUl{
@@ -53,6 +54,37 @@
                 color: #fff;
                 border: none;
                 border-radius: 2px;
+            }.offcanvas-body{
+                position: relative;
+            }
+            #cartBottom{
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                width: 95%;
+            }
+            .text-right{
+                text-align: right !important;
+            }
+            .cartColor{
+                height: 15px;
+                width: 15px;
+                border-radius:3px; 
+                display: inline-block;
+            }
+            a,button{
+                position: relative;
+            }
+            #loader_div{
+                position: absolute;
+                top: -1px;
+                left: -1px;
+                background-color: #ffffffeb;
+                width: 101%;
+                height: 101%;
+                display: flex;
+                justify-content: center;
+                align-content: center
             }
         </style>
     </head>
@@ -63,26 +95,11 @@
               <h5 id="offcanvasRightLabel" class="m-0">Cart</h5>
               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
-                <ul class="cartUl">
-                    <li>
-                        <div class="d-flex gap-2">
-                            <div>
-                                <img src="{{asset('default_avatar.jpg')}}" width="65px" height="65px" alt="">
-                            </div>
-                            <div style="width: 230px">
-                                <p class="mt-2 fw-bolder fs-6 mb-0">Product Title</p>
-                                <div class="d-flex gap-2">Price : 2999 <div class="cart-plus-minus cus">
-                                        <input type="text" value="1" id="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <button id="removeCartBtn"><i class="fa fa-trash"></i></button>
-                        </div>
-                    </li>
+            <div class="offcanvas-body" id="cartCanavsBody">
+                <ul class="cartUl" id="cartUl">
+                    
                 </ul>
+                <div id="cartBottom"></div>
             </div>
           </div>
         <!-- Preloader -->
@@ -105,6 +122,11 @@
 
 
   <!-- JS here -->
+  <script>
+    let ASSET_URL = "{{ asset('/') }}";
+    let SITE_URL = "{{ url('/') }}";
+    let LOADER = "{{ asset('/frontend_assets/img/loader.gif') }}"
+  </script>
   <script src="{{ asset('frontend_assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('frontend_assets/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('frontend_assets/js/isotope.pkgd.min.js') }}"></script>
@@ -115,6 +137,7 @@
   <script src="{{ asset('frontend_assets/js/slick.min.js') }}"></script>
   <script src="{{ asset('frontend_assets/js/wow.min.js') }}"></script>
   <script src="{{ asset('frontend_assets/js/main.js') }}"></script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   @yield('script')
   @livewireScripts
 </body>

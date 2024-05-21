@@ -52,7 +52,7 @@
                             <ul>
                                 <li><a href="#"><i class="far fa-star"></i>Wishlist</a></li>
                                 <li><a href="#"><i class="fas fa-redo"></i>Compare</a></li>
-                                <li class="header-shop"><a href="#"  data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas" id="cartBtn"><i class="flaticon-shopping-bag"></i>Cart
+                                <li class="header-shop"><a href="#"  id="cartBtn"><i class="flaticon-shopping-bag"></i>Cart
                                 <span class="cart-count" id="cartCount">{{ auth()->check() ? auth()->user()->carts()->count() : '0' }}</span>
                                 </a></li>
                                 <li class="header-sine-in">

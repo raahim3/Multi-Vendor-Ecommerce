@@ -579,7 +579,6 @@ $('.flash-isotope-active').imagesLoaded(function () {
 	$('.product-menu-nav button,.shop-details-color label,.color-wrap li').on('click', function (event) {
 	$(this).siblings('.active').removeClass('active');
 	$(this).addClass('active');
-	event.preventDefault();
 });
 
 
@@ -597,18 +596,71 @@ function wowAnimation() {
 	wow.init();
 }
 
+function getCartData() {
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 
-$(document).on('click','#cartBtn',function(){
 	$.ajax({
-		url:"get/cart/data",
+		url: SITE_URL+"/get/cart/data",
 		type:"GET",
 		success:function(response){
+				var html = '';
+				var total = 0;
 			if (response.status == 'success') {
 				response.data.forEach(element => {
-					
+					html += '<li><div class="d-flex gap-2"><div>';
+					html += '<img src="'+ ASSET_URL+'product_image/'+element.product.image +'" width="65px" height="65px" alt="">';
+					html += '</div><div style="width: 230px"><p class="mt-0 fw-bolder fs-6 mb-0">'+element.product.title+'</p>';
+					html += '<div class="">Price : '+ element.product.price +' , Q : '+element.quantity+' , C : <span class="cartColor" style="background-color:'+ element.color_code +';"></span> <br> Sub Total : '+element.sub_total+'</div></div>';
+					html += '</div><div><button id="removeCartBtn" data-id="'+ element.id +'"><i class="fa fa-trash"></i></button></div></li>'
+					total += element.sub_total;
 				});
+
+				var cart_bottom = '<h6 class="text-right">Total : <span id="TotalCart">'+total+'</span></h6>';
+				cart_bottom +='<a href="#" class="btn btn-info w-100">Checkout</a>';
+				$('#cartUl').html(html);
+				$('#cartBottom').html(cart_bottom);
 			}
 		}
+	});
+}
+
+$(document).on('click','#cartBtn',function(){
+	getCartData();
+	var offcanvasElement = document.getElementById('cartCanvas');
+	var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+	offcanvas.show();
+});
+$(document).on('click','#removeCartBtn',function(){
+	let id = $(this).data('id');
+	let _this = $(this);
+
+	$.ajax({
+		url: SITE_URL+"/remove/cart/data",
+		type:"POST",
+		data:{id},
+		beforeSend:function(){
+			$(_this).append('<div id="loader_div"><img src="'+LOADER+'" style="width:40px !important"></div>');
+		},
+		success:function(response){
+			if (response.status == 'success') {
+				getCartData();
+				Toastify({
+				text: response.message,
+				className: response.status,
+				style: {
+					background: response.status == 'success' ? "#008000" : 'red',
+				}
+				}).showToast();
+				$('#cartCount').html(response.count);
+			}
+		},
+		complete: function(){
+			_this.find('#loader_div').remove();
+		},
 	});
 });
 

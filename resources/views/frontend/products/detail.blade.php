@@ -92,8 +92,9 @@
                             <span>Color :</span>
                             <ul>
                                 @foreach ($product->colors as $key => $color)
-                                    <input type="radio" name="color" {{ $key == 0 ? 'checked' : '' }} hidden id="color__{{$key}}" value="{{$color->name}}">
-                                    <label for="color__{{$key}}" class="{{ $key == 0 ? 'active' : '' }}" style="background-color: {{$color->color}} !important;"></label>
+                                <input type="radio" hidden  name="color" {{ $key == 0 ? 'checked' : '' }} data-code="{{$color->color}}" id="{{$color->color}}" value="{{$color->name}}">
+                                    <label for="{{$color->color}}" class="{{ $key == 0 ? 'active' : '' }}" style="background-color: {{$color->color}} !important;">
+                                    </label>
                                 @endforeach
                             </ul>
                         </div>
@@ -904,7 +905,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row popular-product-active">
+            {{-- <div class="row popular-product-active">
                 <div class="col-xl-2">
                     <div class="product-item-three">
                         <div class="product-thumb">
@@ -989,7 +990,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
     <!-- popular-product-area-end -->
@@ -1016,7 +1017,7 @@
     <!-- newsletter-area-end -->
 </main>
 <!-- main-area-end -->
-
+<div id="or_button" class="d-none"></div>
 
 @endsection
 @section('script')
@@ -1024,7 +1025,10 @@
         $(document).on('click','#addToCartBtn',function(){
             let product_id = $(this).data('product-id');
             let quantity = $('#quantity').val();
-            let color = $('input[name=color]').val();
+            let color = $('input[name=color]:checked').val();
+            let color_code = $('input[name=color]:checked').data('code');
+            let _this = $(this);
+            $('#or_button').html(_this.html());
 
             $.ajaxSetup({
                 headers: {
@@ -1035,12 +1039,25 @@
             $.ajax({
                 url:"{{ route('cart.store') }}",
                 type:"POST",
-                data:{product_id,quantity,color},
+                data:{product_id,quantity,color,color_code},
+                beforeSend:function(){
+                    $(_this).append('<div id="loader_div"><img src="'+LOADER+'" style="width:40px !important"></div>');
+                },
                 success:function(response){
+                        Toastify({
+                        text: response.message,
+                        className: response.status,
+                        style: {
+                            background: response.status == 'success' ? "#008000" : 'red',
+                        }
+                        }).showToast();
                     if(response.status == 'success'){
                         $('#cartCount').text(response.count);
                     }
                 },
+                complete: function(){
+                    _this.find('#loader_div').remove();
+                }
             });
         });
     </script>

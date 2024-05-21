@@ -29,6 +29,7 @@ Route::get('/blog/like/store',[BlogController::class,'likeStore'])->name('blog.l
 Route::get('/blog/comment/store',[BlogController::class,'commentStore'])->name('blog.comment.store');
 Route::get('/product/{slug}',[ProductController::class,'detail'])->name('product.detail');
 Route::get('/get/cart/data',[CartController::class,'get_data'])->name('cart.data');
+Route::post('/remove/cart/data',[CartController::class,'remove_cart'])->name('cart.remove');
 
 Auth::routes(['verify' => true]);
 
