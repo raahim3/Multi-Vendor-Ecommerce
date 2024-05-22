@@ -86,6 +86,9 @@
                 justify-content: center;
                 align-content: center
             }
+            .fs-13{
+                font-size: 12px
+            }
         </style>
     </head>
     <body>

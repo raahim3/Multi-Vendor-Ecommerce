@@ -33,6 +33,9 @@ class CartController extends Controller
         return response()->json(['status'=>'success','count'=>$cart_count,'message'=>'Product Successfully Added to Cart!']);    
     }
     public function get_data(){
+        if(!auth()->check()){
+            return response()->json(['status'=>'unauthenticated','message'=>"Please Login First"]);    
+        }
         $cart_data = Cart::with('product')->where('user_id',auth()->user()->id)->get();
         return response()->json(['status'=>'success','data'=>$cart_data]);    
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\PurchaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,6 @@ Auth::routes(['verify' => true]);
 
 Route::middleware('auth')->group(function () {
     Route::post('cart',[CartController::class,'cart_store'])->name('cart.store');
+    Route::get('/checkout',[PurchaseController::class,'checkout'])->name('checkout');
+    Route::post('/checkout',[PurchaseController::class,'checkout_store'])->name('checkout.store');
 });

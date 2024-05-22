@@ -13,6 +13,12 @@
                         <ul>
                             <li><a href="{{ route('vendor.register.get') }}" wire:navigate>Become a Vendor</a></li>
                             <li><a href="{{ route('blog.index') }}" wire:navigate>Blog</a></li>
+                            @auth
+                            <form action="{{route('logout')}}" method="post">
+                                @csrf
+                                <li><button type="submit">Logout</button></li>
+                            </form>
+                            @endauth
                             <li><a href="contact.html">Contact Us</a></li>
                         </ul>
                     </div>

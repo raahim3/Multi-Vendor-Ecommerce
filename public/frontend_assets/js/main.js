@@ -623,6 +623,8 @@ function getCartData() {
 				cart_bottom +='<a href="#" class="btn btn-info w-100">Checkout</a>';
 				$('#cartUl').html(html);
 				$('#cartBottom').html(cart_bottom);
+			}else if(response.status == 'unauthenticated'){
+				$('#cartUl').html('<h5 class="text-center">'+response.message+'!</h5>');
 			}
 		}
 	});
