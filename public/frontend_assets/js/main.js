@@ -620,7 +620,7 @@ function getCartData() {
 				});
 
 				var cart_bottom = '<h6 class="text-right">Total : <span id="TotalCart">'+total+'</span></h6>';
-				cart_bottom +='<a href="#" class="btn btn-info w-100">Checkout</a>';
+				cart_bottom +='<a href="/checkout" class="btn btn-info w-100">Checkout</a>';
 				$('#cartUl').html(html);
 				$('#cartBottom').html(cart_bottom);
 			}else if(response.status == 'unauthenticated'){

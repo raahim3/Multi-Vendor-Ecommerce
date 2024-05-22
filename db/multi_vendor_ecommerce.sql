@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 20, 2024 at 07:40 PM
+-- Generation Time: May 22, 2024 at 07:53 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -214,6 +214,7 @@ CREATE TABLE `carts` (
   `id` bigint UNSIGNED NOT NULL,
   `quantity` int NOT NULL,
   `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color_code` text COLLATE utf8mb4_unicode_ci,
   `sub_total` bigint NOT NULL,
   `product_id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
@@ -225,8 +226,9 @@ CREATE TABLE `carts` (
 -- Dumping data for table `carts`
 --
 
-INSERT INTO `carts` (`id`, `quantity`, `color`, `sub_total`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 4, 'Black', 119700, 4, 1, '2024-05-21 01:21:43', '2024-05-21 01:21:43');
+INSERT INTO `carts` (`id`, `quantity`, `color`, `color_code`, `sub_total`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(17, 2, 'black', '#000000', 5998, 3, 1, '2024-05-23 01:21:03', '2024-05-23 01:21:03'),
+(18, 1, 'Red', '#c78e8e', 1300, 6, 1, '2024-05-23 02:12:27', '2024-05-23 02:12:27');
 
 -- --------------------------------------------------------
 
@@ -334,7 +336,53 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2024_05_19_112433_create_product_colors_table', 7),
 (21, '2024_05_19_113057_create_product_sizes_table', 7),
 (22, '2024_05_19_113414_create_product_additional_infos_table', 7),
-(23, '2024_05_20_171531_create_carts_table', 8);
+(23, '2024_05_20_171531_create_carts_table', 8),
+(24, '2024_05_22_193445_create_orders_table', 9),
+(25, '2024_05_22_193957_create_order_items_table', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zipcode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_method` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total` bigint NOT NULL,
+  `delivery_charges` bigint NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `order_id` bigint UNSIGNED NOT NULL,
+  `quantity` int NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color_code` text COLLATE utf8mb4_unicode_ci,
+  `sub_total` bigint NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -701,6 +749,21 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_items_product_id_foreign` (`product_id`),
+  ADD KEY `order_items_order_id_foreign` (`order_id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -827,7 +890,7 @@ ALTER TABLE `blog_sub_categories`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -851,7 +914,19 @@ ALTER TABLE `generals`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -955,6 +1030,19 @@ ALTER TABLE `blog_sub_categories`
 ALTER TABLE `carts`
   ADD CONSTRAINT `carts_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `carts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `products`
