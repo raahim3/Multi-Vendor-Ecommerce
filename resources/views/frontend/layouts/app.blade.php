@@ -143,6 +143,28 @@
  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   @yield('script')
   @livewireScripts
+  @session('success')
+        <script>
+        Toastify({
+            text: "{{ session('success') }}",
+            className: "success",
+            style: {
+                background: "#008000",
+            }
+            }).showToast();
+        </script>
+        @endsession
+        @session('error')
+        <script>
+        Toastify({
+            text: "{{ session('error') }}",
+            className: "success",
+            style: {
+                background: "red",
+            }
+            }).showToast();
+        </script>
+        @endsession
 </body>
 
 </html>

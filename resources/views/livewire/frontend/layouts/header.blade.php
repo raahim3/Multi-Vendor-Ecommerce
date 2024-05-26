@@ -43,14 +43,14 @@
                 <div class="col-xl-10 col-lg-9">
                     <div class="d-block d-sm-flex align-items-center justify-content-end">
                         <div class="header-search-wrap">
-                            <form action="#">
-                                <input type="text" placeholder="Search for product...">
-                                <select class="custom-select">
+                            <form action="{{ route('shop.index') }}" method="GET">
+                                <input type="text" name="search" value="{{ request('search') && request('search') != '' ? request('search') : null }}" placeholder="Search for product...">
+                                {{-- <select class="custom-select">
                                     <option selected="">All Categories</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->title }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                                 <button><i class="fas fa-search"></i></button>
                             </form>
                         </div>
@@ -116,12 +116,7 @@
                             <div class="navbar-wrap main-menu d-none d-lg-flex">
                                 <ul class="navigation">
                                     <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ url('/') }}"  wire:navigate>Home</a></li>
-                                    <li class="menu-item-has-children"><a href="#">SHOP</a>
-                                        <ul class="submenu">
-                                            <li><a href="#">Our Shop</a></li>
-                                            <li><a href="shop-details.html">shop Details</a></li>
-                                        </ul>
-                                    </li>
+                                    <li class="{{ Request::is('shop') ? 'active' : '' }}"><a href="{{ url('shop') }}" wire:navigate>SHOP</a></li>
                                     <li><a href="promotion.html">PROMOTION</a></li>
                                     <li class="{{ Request::is('blogs') ? 'active' : '' }} {{ Request::is('blog/*') ? 'active' : '' }}"><a  href="{{ route('blog.index') }}" wire:navigate>BLOG</a></li>
                                     <li><a href="index-3.html">SPECIAL</a></li>

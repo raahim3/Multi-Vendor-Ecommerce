@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\PurchaseController;
+use App\Http\Controllers\Frontend\ShopController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ Route::get('/blog/comment/store',[BlogController::class,'commentStore'])->name('
 Route::get('/product/{slug}',[ProductController::class,'detail'])->name('product.detail');
 Route::get('/get/cart/data',[CartController::class,'get_data'])->name('cart.data');
 Route::post('/remove/cart/data',[CartController::class,'remove_cart'])->name('cart.remove');
+Route::get('/shop',[ShopController::class,'index'])->name('shop.index');
 
 Auth::routes(['verify' => true]);
 

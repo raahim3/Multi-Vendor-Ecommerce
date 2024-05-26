@@ -46,7 +46,6 @@ class SubCategoryController extends Controller
         {
             $sub_category = new SubCategory();
             $sub_category->title = $title;
-            $sub_category->slug = Str::slug($title);
             $sub_category->icon = $request->icon[$key];
             $sub_category->category_id = $request->category_id;
             $img = $request->image[$key];
@@ -54,6 +53,10 @@ class SubCategoryController extends Controller
             $img->move("category_image/",$ext);
             $sub_category->image = $ext;
             $sub_category->save();
+
+            $sub_category_u = SubCategory::find($sub_category->id);
+            $sub_category_u->slug = Str::slug($title." ".$sub_category->id);
+            $sub_category_u->update();
         }
         return redirect()->route('admin.sub_categories.index')->with('success', 'Sub Category has been created successfully');
     }
@@ -90,7 +93,7 @@ class SubCategoryController extends Controller
 
         $sub_category = SubCategory::find($id);
         $sub_category->title = $request->title;
-        $sub_category->slug = Str::slug($request->title);
+        $sub_category->slug = Str::slug($request->title." ".$id);
         $sub_category->category_id = $request->category_id;
         $sub_category->icon = $request->icon;
         if($request->image)

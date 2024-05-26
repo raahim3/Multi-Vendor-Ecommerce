@@ -41,4 +41,19 @@ class Product extends Model
     public function carts(){
         return $this->hasMany(Cart::class);
     }
+    public function order(){
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function percentageSold()
+    {
+        $totalOrdered = $this->order()->sum('quantity');
+        $totalStock = $this->quantity;
+
+        if ($totalStock > 0) {
+            return ($totalOrdered / $totalStock) * 100;
+        }
+
+        return 0;
+    }
 }

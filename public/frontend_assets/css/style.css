@@ -6350,3 +6350,8 @@ label {
 #storeLike.active{
     color: #ff4800;
 }
+.categoty_acrd_body{
+    max-height: 110px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

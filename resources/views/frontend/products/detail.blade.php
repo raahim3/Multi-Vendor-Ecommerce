@@ -31,7 +31,7 @@
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane show active" id="nav-item-one" role="tabpanel" aria-labelledby="nav-item-one-tab">
                                 <div class="shop-details-img">
-                                    <img src="{{ asset('product_image/').'/'.$product->image }}" alt="img">
+                                    <img src="{{ asset('product_image/').'/'.$product->image }}" alt="img" width="100%">
                                 </div>
                             </div>
                             @foreach ($product->images as $key => $image)
@@ -1057,6 +1057,16 @@
                 },
                 complete: function(){
                     _this.find('#loader_div').remove();
+                },
+                error:function(error){
+                        Toastify({
+                        text: 'Please login first!',
+                        className: 'error',
+                        style: {
+                            background: 'red',
+                        }
+                        }).showToast();
+
                 }
             });
         });

@@ -206,16 +206,21 @@ function mainSliderTwo() {
 /*=============================================
 	=    	 Slider Range Active  	         =
 =============================================*/
+
+var fil_min = $('#min_price').val();
+var fil_max = $('#max_price').val();
 $("#slider-range").slider({
 	range: true,
-	min: 40,
-	max: 600,
-	values: [40, 350],
+	min: 100,
+	max: 100000,
+	values: [fil_min, fil_max],
 	slide: function (event, ui) {
-		$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+		$("#amount").val("Rs" + ui.values[0] + " - Rs" + ui.values[1]);
+		$('#min_price').val(ui.values[0]);
+		$('#max_price').val(ui.values[1]);
 	}
 });
-$("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+$("#amount").val("Rs" + $("#slider-range").slider("values", 0) + " - Rs" + $("#slider-range").slider("values", 1));
 
 
 /*=============================================
